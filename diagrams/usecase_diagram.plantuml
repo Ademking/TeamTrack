@@ -1,0 +1,64 @@
+@startuml usecaseDiagram
+left to right direction
+skinparam packageStyle rectangle
+skinparam packageBorderThickness 1
+skinparam defaultFontSize 10
+
+
+
+actor Administrateur
+actor Employé
+
+rectangle  "Employee Management" {
+    together {
+        usecase "Gérer les employés" as GérerEmployés
+        usecase "Gérer les congés" as GérerCongés
+        usecase "Gérer les missions" as GérerMissions
+        usecase "Gérer les annonces" as GérerAnnonces
+        usecase "Gérer les formations" as GérerFormations
+        usecase "Gérer le forum" as GérerForum
+    }
+    together {
+        usecase "Chercher un employé" as ChercherEmployé
+        usecase "Mettre à jour ses informations" as MettreÀJourInformations
+        usecase "Demander un congé" as DemanderCongé
+        usecase "Consulter ses missions" as ConsulterMissions
+        usecase "Consulter ses demandes de congés" as ConsulterDemandesCongés
+        usecase "Consulter les formations" as ConsulterFormations
+        usecase "Consulter les annonces" as ConsulterAnnonces
+        usecase "Consulter les publications sur le forum" as ConsulterPublicationsForum
+        usecase "Publier sur le forum" as PublierForum
+        usecase "Répondre à une publication" as RépondrePublication
+          usecase "S'autentifier" as login
+    }
+    GérerEmployés -[hidden]- GérerForum
+  
+}
+
+
+
+Employé --> ChercherEmployé
+Employé --> MettreÀJourInformations
+Employé --> DemanderCongé
+Employé --> ConsulterMissions
+Employé --> ConsulterDemandesCongés
+Employé --> ConsulterFormations
+Employé --> ConsulterAnnonces
+Employé --> ConsulterPublicationsForum
+Employé --> PublierForum
+Employé --> RépondrePublication
+
+
+GérerEmployés -- Administrateur
+GérerCongés -- Administrateur
+GérerMissions -- Administrateur
+GérerAnnonces -- Administrateur
+GérerFormations -- Administrateur
+GérerForum -- Administrateur
+
+
+
+
+
+
+@enduml

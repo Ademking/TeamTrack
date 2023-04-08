@@ -1,0 +1,145 @@
+<div>
+    <div *ngIf='isOffCanvasMenu' class="fixed inset-0 flex z-40 md:hidden" role="dialog" aria-modal="true">
+        <div @AnimationTrigger0 *ngIf='isOffCanvasMenu' class="fixed inset-0 bg-gray-600 bg-opacity-75"
+            aria-hidden="true"></div>
+
+        <div @AnimationTrigger1 *ngIf='isOffCanvasMenu'
+            class="relative flex-1 flex flex-col max-w-xs w-full bg-gray-800">
+            <div @AnimationTrigger2 *ngIf='isOffCanvasMenu' class="absolute top-0 right-0 -mr-12 pt-2">
+                <button type="button" (click)="toggleOffCanvasMenu()"
+                    class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <span class="sr-only">Close sidebar</span>
+                    <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+                <div class="flex-shrink-0 flex items-center px-4">
+                    <img class="h-8 w-auto" [src]="logo" alt="TeamTrack">
+                </div>
+                <nav class="mt-5 px-2 space-y-1">
+                    <a *ngFor="let item of menuItems" [routerLink]="[item.path]" routerLinkActive
+                        (click)="toggleOffCanvasMenu()" [routerLinkActiveOptions]="{ exact: true }"
+                        #link="routerLinkActive"
+                        [ngClass]="{'bg-gray-900 text-white': link.isActive, 'text-gray-300 hover:bg-gray-700 hover:text-white': !link.isActive}"
+                        class="group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        <div [innerHTML]="item.icon | safeHtml"></div>
+                        {{item.title}}
+                    </a>
+                </nav>
+            </div>
+            <div class="flex-shrink-0 flex bg-gray-700 p-4">
+                <a href="#" class="flex-shrink-0 group block">
+                    <div class="flex items-center">
+                        <div>
+
+                            <span class="inline-flex items-center justify-center h-10 w-10 rounded-full"
+                                [ngClass]="generateRandomColor(user?.lastname.charAt(0))">
+                                <span class="text-xl font-medium leading-none text-white">{{
+                                    user?.firstname.charAt(0) }}{{ user?.lastname.charAt(0)
+                                    }}</span>
+                            </span>
+
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-base font-medium text-white">{{ user?.firstname }} {{ user?.lastname }}</p>
+                            <p class="text-sm font-medium text-gray-400 group-hover:text-gray-300">View profile</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex-shrink-0 w-14">
+        </div>
+    </div>
+
+    <!-- desktop -->
+    <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+        <div class="flex-1 flex flex-col min-h-0 bg-gray-800">
+            <div class="flex-1 flex flex-col overflow-y-auto">
+                <div class="flex items-center h-16 flex-shrink-0 px-4 bg-gradient-to-t from-gray-800 to-gray-950">
+                    <img class="h-8 w-auto" [src]="logo" alt="TeamTrack">
+                </div>
+                <nav class="mt-5 flex-1 px-2 space-y-1">
+
+                    <a *ngFor="let item of menuItems" [routerLink]="[item.path]" routerLinkActive
+                        [routerLinkActiveOptions]="{ exact: true }" #link="routerLinkActive"
+                        [ngClass]="{'bg-gray-900 text-white': link.isActive, 'text-gray-300 hover:bg-gray-700 hover:text-white': !link.isActive}"
+                        class="group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        <div [innerHTML]="item.icon | safeHtml"></div>
+                        {{item.title}}
+                    </a>
+
+                </nav>
+            </div>
+            <div class="flex-shrink-0 flex bg-gray-700 p-4">
+                <a routerLinkActive="router-link-active" class="flex-shrink-0 w-full group block">
+                    <div class="flex items-center">
+                        <div>
+
+                            <span class="inline-flex items-center justify-center h-9 w-9 rounded-full"
+                                [ngClass]="generateRandomColor(user?.lastname.charAt(0))">
+                                <span class="text-sm font-medium leading-none text-white">{{
+                                    user?.firstname.charAt(0) }}{{ user?.lastname.charAt(0)
+                                    }}</span>
+                            </span>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-white">{{ user?.firstname }} {{ user?.lastname }}</p>
+                            <ng-container *ngIf="user?.role == 'ROLE_ADMIN'">
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">
+                                    Administrateur</span>
+                            </ng-container>
+
+                            <ng-container *ngIf="user?.role == 'ROLE_EMPLOYEE'">
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Employé</span>
+                            </ng-container>
+
+                        </div>
+
+                        <div class="ml-auto">
+                            <!-- btn to logout -->
+                            <button (click)="logout()"
+                                class="bg-gray-800 text-white px-2 py-2 rounded-md text-sm font-medium"
+                                pTooltip="Déconnexion" tooltipPosition="right" appendTo="body">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-log-out w-5 h-5">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="md:pl-64 flex flex-col flex-1">
+        <div class="sticky top-0 z-10 md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-gray-100">
+            <button type="button" (click)="toggleOffCanvasMenu()"
+                class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <span class="sr-only">Open sidebar</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <main class="flex h-screen">
+
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>

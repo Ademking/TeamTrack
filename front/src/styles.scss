@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+
+.ag-theme-alpine {
+  // --ag-borders: none;
+  --ag-font-family: 'Work Sans', sans-serif;
+
+  --ag-foreground-color: theme('colors.gray.900');
+  --ag-background-color: theme('colors.gray.100');
+  --ag-header-foreground-color: theme('colors.gray.500');
+  --ag-header-background-color: theme('colors.gray.50');
+  --ag-odd-row-background-color: theme('colors.gray.100');
+  --ag-header-column-resize-handle-color: theme('colors.gray.100');
+  --ag-background-color: theme('colors.white');
+  --ag-odd-row-background-color: theme('colors.white');
+  --ag-data-color: theme('colors.gray.600');
+}
+/* fix ag-grid */
+.ag-theme-alpine .ag-header-cell-text {
+  @apply text-xs font-medium text-gray-500 uppercase tracking-wider;
+}
+.ag-theme-alpine .ag-root-wrapper {
+  border-radius: 0.375rem;
+}
+.ag-cell-focus,
+.ag-cell {
+  border: none !important;
+}
+
+/* end ag-grid */
+
+/* fix primeng */
+.p-inputtext,
+.p-togglebutton,
+.p-selectbutton,
+.p-inputgroup {
+  box-shadow: none !important;
+}
+
+.p-dialog .p-dialog-header {
+  padding: 0.5rem 1rem !important;
+}
+
+.p-dialog-title {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+/* end primeng */
+
+html,
+body {
+  font-size: 15px;
+}
+

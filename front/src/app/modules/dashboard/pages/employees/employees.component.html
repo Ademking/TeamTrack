@@ -1,0 +1,496 @@
+<div class="h-full">
+    <header class="bg-gray-50 py-8">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
+            <div class="flex-1 min-w-0">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol role="list" class="flex items-center space-x-4">
+                        <li>
+                            <div>
+                                <a href="#" class="text-sm font-medium text-gray-500 hover:text-gray-700">Accueil</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <!-- Heroicon name: solid/chevron-right -->
+                                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <a href="#"
+                                    class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Employés</a>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Employés</h1>
+                <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-8">
+                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                        <!-- Heroicon name: solid/briefcase -->
+                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                                clip-rule="evenodd" />
+                            <path
+                                d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                        </svg>
+                        Liste des employés de l'entreprise
+                    </div>
+
+                </div>
+            </div>
+            <div class="mt-5 flex xl:mt-0 xl:ml-4">
+                <span class="hidden sm:block pr-2">
+                    <button type="button" (click)="openTeamsModal()"
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="-ml-1 mr-2 h-5 w-5 text-gray-400">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                        </svg>
+                        Equipes
+                    </button>
+                </span>
+
+                <span class=" sm:block" *hasRole="['ROLE_ADMIN']" >
+                    <button type="button" (click)="displayAddNewEmployeeDialog = true"
+                        class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <!-- Heroicon name: solid/plus -->
+                        <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Ajouter un employé
+                    </button>
+                </span>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="h-full flex">
+        <div class="flex flex-col min-w-0 flex-1 overflow-hidden">
+            <div class="flex-1 relative z-0 flex overflow-hidden">
+                <!-- No selected User (empty state)-->
+                <main class="py-10 flex-1 overflow-y-auto" *ngIf="!selectedUser">
+                    <div class="grid h-full place-items-center">
+                        <div class="text-center">
+
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="mx-auto h-12 w-12 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
+                            </svg>
+
+
+
+                            <h3 class="mt-2 text-sm font-medium text-gray-900">Sélectionner un employé</h3>
+                            <p class="mt-1 text-sm text-gray-500">Si vous souhaitez voir les détails d'un employé,
+                                cliquez sur
+                                son nom dans la liste.</p>
+                            <div class="mt-6" *hasRole="['ROLE_ADMIN']">
+                                <button type="button" (click)="displayAddNewEmployeeDialog = true"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <!-- Heroicon name: solid/plus -->
+                                    <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Ajouter un employé
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+
+                <!-- User Details -->
+                <main class="py-10 flex-1 min-h-0 overflow-y-auto" *ngIf="selectedUser">
+                    <!-- Page header -->
+                    <div class="mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between ">
+                        <div class="flex items-center space-x-5">
+                            <div class="flex-shrink-0">
+                                <div class="relative">
+                                    <span
+                                        class="inline-flex items-center justify-center h-16 w-16 rounded-full" [ngClass]="generateRandomColor(selectedUser?.lastname.charAt(0))">
+                                        <span class="text-xl font-medium leading-none text-white">{{
+                                            selectedUser?.firstname.charAt(0) }}{{ selectedUser?.lastname.charAt(0)
+                                            }}</span>
+                                    </span>
+
+                                    <!-- <img class="h-16 w-16 rounded-full" [src]="selectedUser?.avatar" alt=""> -->
+                                    <span class="absolute inset-0 shadow-inner rounded-full" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold text-gray-900">{{selectedUser?.firstname}}
+                                    {{selectedUser?.lastname}}</h1>
+                                <p class="text-sm font-medium text-gray-500">{{ selectedUser?.job }}</p>
+                            </div>
+                        </div>
+                        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle">
+                        </p-confirmDialog>
+                        <div
+                            class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
+                            <button type="button" *hasRole="['ROLE_ADMIN']"
+                                class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">Modifier</button>
+                            <button type="button" *hasRole="['ROLE_ADMIN']" (click)="deleteUser(selectedUser.id)"
+                                class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">Supprimer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:grid-flow-col-dense ">
+                        <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+                            <!-- Description list-->
+                            <section aria-labelledby="applicant-information-title">
+                                <div class="bg-white shadow sm:rounded-lg">
+                                    <div class="px-4 py-5 sm:px-6">
+                                        <h2 id="applicant-information-title"
+                                            class="text-lg leading-6 font-medium text-gray-900">Infomations de l'employé
+                                        </h2>
+                                        <p class="mt-1 max-w-2xl text-sm text-gray-500">Informations personnelles et
+                                            professionnelles.
+                                        </p>
+                                    </div>
+                                    <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                                        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Prénom</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.firstname}}
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Nom</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.lastname }}
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Genre</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.gender }}</dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Adresse email</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.email }}
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Téléphone</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">+ 1 (555) 987-6543
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Poste</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.job }}
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Code</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">#12345
+                                            </div>
+                                            <div class="sm:col-span-2">
+                                                <dt class="text-sm font-medium text-gray-500">Adresse</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.address }}
+                                            </div>
+                                           
+                                        </dl>
+                                    </div>
+
+                                </div>
+                            </section>
+
+
+                        </div>
+
+
+                    </div>
+                </main>
+
+                <!-- Search Users -->
+                <aside class=" xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200 bg-white">
+                    <div class="px-6 pt-6 pb-4">
+
+                        <form class=" flex space-x-4" action="#">
+                            <div class="flex-1 min-w-0">
+                                <label for="search" class="sr-only">Rechercher</label>
+                                <div class="relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <!-- Heroicon name: solid/search -->
+                                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <input type="search" name="search" id="search" (keyup)="search($event)"
+                                        class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="Rechercher">
+                                </div>
+                            </div>
+                            <button type="submit" (click)="op.toggle($event)"
+                                class="inline-flex justify-center px-3.5 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <!-- Heroicon name: solid/filter -->
+                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="sr-only">Search</span>
+                            </button>
+
+                            <p-overlayPanel #op>
+                                <ng-template pTemplate>
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900">Recherche avancée</h3>
+
+                                    <div class="mt-2">
+                                        <div>
+                                            <label for="prenom"
+                                                class="block text-xs font-medium text-gray-700">Prénom</label>
+                                            <div class="mt-1">
+                                                <input type="text" name="prenom" id="prenom"
+                                                    (keyup)="searchByFirstname($event)"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-xs border-gray-300 rounded-md"
+                                                    placeholder="Prénom">
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <label for="nom" class="block text-xs font-medium text-gray-700">Nom</label>
+                                            <div class="mt-1">
+                                                <input type="text" name="nom" id="nom"
+                                                    (keyup)="searchByLastname($event)" class=" shadow-sm focus:ring-indigo-500 focus:border-indigo-500
+                                                    block w-full sm:text-xs border-gray-300 rounded-md"
+                                                    placeholder="Nom">
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <label for="email"
+                                                class="block text-xs font-medium text-gray-700">Email</label>
+                                            <div class="mt-1">
+                                                <input type="text" name="email" id="email"
+                                                    (keyup)="searchByEmail($event)"
+                                                    class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-xs border-gray-300 rounded-md"
+                                                    placeholder="Email">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div>
+                                        <!-- Clear -->
+                                        <button type="button"
+                                            class="mt-2 inline-flex justify-center px-2 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Effacer
+                                        </button>
+                                    </div>
+
+                                </ng-template>
+                            </p-overlayPanel>
+                        </form>
+                    </div>
+                    <!-- Directory list -->
+                    <nav class="flex-1 min-h-0 overflow-y-auto" aria-label="Directory">
+
+                        <!-- Loading -->
+                        <p *ngIf="isLoading" class="text-center text-gray-500 text-sm">Chargement en cours...</p>
+
+                        <!-- No results -->
+                        <div *ngIf="!isLoading && !(filtredGroupedUsers | keyvalue)?.length">
+                            <div class="text-center py-4">
+
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="mx-auto h-12 w-12 text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z" />
+                                </svg>
+
+
+
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">
+                                    Aucun résultat
+                                </h3>
+                                <p class="mt-1 text-sm text-gray-500">
+                                    Votre recherche ne correspond à aucun résultat.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative" *ngFor="let item of filtredGroupedUsers | keyvalue">
+                            <div
+                                class="z-10 sticky top-0 border-t border-b border-r border-gray-200 bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500">
+                                <h3>{{item.key}} </h3>
+                            </div>
+                            <ul role="list" class="relative z-0 divide-y divide-gray-200">
+                                <li *ngFor="let user of $any(item).value ">
+                                    <div class="relative px-6 py-5 flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                                        [ngClass]="{'bg-gray-200': user.id == selectedUser?.id }">
+                                        <div class="flex-shrink-0">
+                                            <span class="inline-flex items-center justify-center h-10 w-10 rounded-full"
+                                                [ngClass]="generateRandomColor(user?.lastname.charAt(0))">
+                                                <span class="text-sm font-small leading-none text-white">{{
+                                                    user?.firstname.charAt(0) }}{{
+                                                    user?.lastname.charAt(0) }}</span>
+                                            </span>
+
+                                            <!-- <img class="h-10 w-10 rounded-full" [src]="user.avatar" alt=""> -->
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <a (click)="openUserDetails(user)"
+                                                class="cursor-pointer focus:outline-none">
+                                                <!-- Extend touch target to entire panel -->
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">{{ user?.firstname }} {{
+                                                    user?.lastname }} </p>
+                                                <p class="text-sm text-gray-500 truncate">{{ user?.email }}</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </nav>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- add employee -->
+<p-dialog header="Ajouter un employé" [(visible)]="displayAddNewEmployeeDialog" [responsive]="true" [modal]="true"
+    [style]="{width: '70vw'}" [draggable]="false" #addModal>
+
+    <div>
+        <div class="">
+            <form [formGroup]="newEmployee">
+                <div class="bg-white px-4 sm:p-6">
+
+                    <div class="grid grid-cols-4 gap-6">
+
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Prénom</label>
+                            <input pInputText type="text" name="first-name" id="first-name" autocomplete="cc-given-name"
+                                formControlName="firstname"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="last-name" class="block text-sm font-medium text-gray-700">Nom</label>
+                            <input pInputText type="text" name="last-name" id="last-name" autocomplete="cc-family-name"
+                                formControlName="lastname"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-3 sm:col-span-1">
+                            <label for="gender" class="block text-sm font-medium text-gray-700">Sexe</label>
+                            <p-selectButton [options]="genders" formControlName="gender" optionLabel="name"
+                                styleClass="p-inputtext-sm w-full">
+                            </p-selectButton>
+                        </div>
+
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="email-address" class="block text-sm font-medium text-gray-700">Email
+                                address</label>
+                            <input pInputText type="text" name="email-address" id="email-address" autocomplete="email"
+                                formControlName="email"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Téléphone</label>
+
+                            <input pInputText type="tel" name="phone" id="phone" autocomplete="phone"
+                                formControlName="phone"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date de naissance
+                            </label>
+                            <p-calendar formControlName="date_of_birth" styleClass="p-inputtext-sm w-full" [maxDate]="maxDate"
+                                appendTo="body"></p-calendar>
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
+
+                            <input pInputText type="text" name="address" id="address" autocomplete="address"
+                                formControlName="address"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="job" class="block text-sm font-medium text-gray-700">Poste
+                            </label>
+                            <input pInputText type="text" name="job" id="job" autocomplete="job" formControlName="job"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+
+                            <input type="password" pPassword name="password" [feedback]="false"
+                                formControlName="password"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="password" class="block text-sm font-medium text-gray-700">Confirmer le mot de
+                                passe</label>
+
+                            <input type="password" pPassword name="password_confirmation" [feedback]="false"
+                                formControlName="password_confirmation"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="code" class="block text-sm font-medium text-gray-700">Code Employé
+                            </label>
+                            <input pInputText type="text" name="code" id="code" autocomplete="code"
+                                formControlName="code"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="code" class="block text-sm font-medium text-gray-700">Equipe
+                            </label>
+                            <p-dropdown [options]="teams" formControlName="team" placeholder="Sélectionner une équipe"
+                                appendTo="body" optionLabel="name" optionValue="id" styleClass="p-inputtext-sm w-full">
+                            </p-dropdown>
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="date_of_hiring" class="block text-sm font-medium text-gray-700">Date d'embauche
+                            </label>
+                            <p-calendar formControlName="date_of_hiring" styleClass="p-inputtext-sm w-full" [maxDate]="maxDate"
+                                appendTo="body"></p-calendar>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" (click)="submitNewEmployee()"
+            class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            [ngClass]="{ 'opacity-50 cursor-not-allowed': newEmployee.invalid }"
+            [disabled]="newEmployee.invalid">Ajouter</button>
+
+    </ng-template>
+
+</p-dialog>

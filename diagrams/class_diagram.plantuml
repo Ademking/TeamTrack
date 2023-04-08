@@ -1,0 +1,111 @@
+@startuml classDiagram
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam classAttributeFontSize 13
+
+class Employees {
+    -id: int
+    -firstname: string
+    -lastname: string
+    -email: string
+    -password: string
+    -gender: string
+    -phone: string
+    -address: string
+    -job: string
+    -date_of_birth: date
+    -date_of_joining: date
+    -is_admin: boolean
+    -employee_code: string
+    -leaves: Leave[]
+    -missions: Mission[]
+    -formations: Formation[]
+}
+
+class Teams {
+    -id: int
+    -name: string
+    -description: string
+    -employees: Employee[]
+    +addEmployee(employee: Employee): void
+    +removeEmployee(employee: Employee): void
+}
+
+class Leaves {
+    -id: int
+    -startDate: date
+    -endDate: date
+    -type: string
+    -reason: string
+    -comment: string
+    -status: string
+    +demandLeave(): void
+    +changeLeaveStatus(): void
+}
+
+class Missions {
+    -id: int
+    -name: string
+    -description: string
+    -start_date: date
+    -end_date: date
+    -status: string
+    +assignEmployee(employee: Employee): void
+    +unassignEmployee(employee: Employee): void
+    +startMission(): void
+    +endMission(): void
+}
+
+class ForumPosts {
+    -id: int
+    -title: string
+    -category: string
+    -content: string
+    -created_at: date
+    -created_by: Employee
+    -comments: Comment[]
+    +addComment(): void
+    +editComment(): void
+    +deleteComment(): void
+}
+
+class Trainings {
+    -id: int
+    -name: string
+    -description: string
+    -date: date
+    -duration: int
+    -location: string
+    -status: string
+    +edit(): void
+    +delete(): void
+    +register(employee: Employee): void
+    +cancelRegistration(employee: Employee): void
+}
+
+class ForumComments {
+    -id: int
+    -content: string
+    -created_at: date
+    -created_by: Employee
+}
+
+class Announcements {
+    -id: int
+    -title: string
+    -content: string
+    -created_at: date
+    -created_by: Employee
+}
+
+Employees "1" -- "0..*" Leaves
+Employees "1" -- "0..*" Trainings
+Employees "1" -- "0..*" ForumComments
+Employees "1" -- "0..*" Announcements
+ForumPosts "1" -- "0..*" ForumComments
+ForumPosts "1" -- "1" Employees
+Trainings "1" -- "0..*" Employees
+Missions "1" -- "0..*" Employees
+Teams "1" -- "0..*" Employees
+
+@enduml

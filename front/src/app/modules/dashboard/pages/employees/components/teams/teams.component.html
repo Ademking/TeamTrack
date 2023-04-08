@@ -1,0 +1,206 @@
+<div *ngIf="isLoading">
+    <div class="flex justify-center items-center py-6">
+        <p class="text-gray-500 text-sm">Chargement des données...</p>
+    </div>
+</div>
+
+<div class="content-here" *ngIf="!isLoading">
+    <div class="block w-full pb-5 sm:flex sm:items-center sm:justify-between"
+        *hasRole="['ROLE_ADMIN']">
+        <div class="block w-full mt-3 sm:mt-0">
+            <button type="button" (click)="displayAddTeamDialog = true"
+                class="text-center w-full  px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <p>
+                    Ajouter une nouvelle équipe
+                </p>
+            </button>
+        </div>
+    </div>
+
+    <div class="bg-white shadow overflow-hidden sm:rounded-md" *ngIf="teams.length > 0">
+
+
+
+
+        <ul role="list" class="divide-y divide-gray-200">
+            <li *ngFor="let team of teams">
+                <a class="block hover:bg-gray-50">
+                    <div class="px-4 py-4 flex items-center sm:px-6">
+                        <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+                            <div class="truncate">
+                                <div class="flex text-sm">
+                                    <p class="font-medium text-indigo-600 truncate">{{ team.name }}</p>
+
+                                </div>
+                                <div class="mt-2 flex">
+                                    <div class="flex items-center text-sm text-gray-500">
+
+                                        <p>
+                                            {{ team.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="ml-5 flex-shrink-0">
+
+                            <span class="relative z-0 inline-flex shadow-sm rounded-md">
+                                <button type="button" pTooltip="Détails" tooltipPosition="bottom" appendTo="body"
+                                    (click)="showTeamMembers(team)"
+                                    class="relative inline-flex items-center px-2 py-1 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"><svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </button>
+                                <button type="button" pTooltip="Modifier" tooltipPosition="bottom" appendTo="body"
+                                    *hasRole="['ROLE_ADMIN']" (click)="showEditTeamDialog(team)"
+                                    class="-ml-px relative inline-flex items-center px-2 py-1 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                    </svg>
+                                </button>
+                                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle">
+                                </p-confirmDialog>
+                                <button (click)="deleteTeam($event, team.id)" type="button" pTooltip="Supprimer"
+                                    tooltipPosition="bottom" appendTo="body" *hasRole="['ROLE_ADMIN']"
+                                    class="-ml-px relative inline-flex items-center px-2 py-1 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-500">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                    </svg>
+                                </button>
+                            </span>
+
+
+
+
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div *ngIf="teams.length == 0">
+        <p class="text-center text-gray-500">Aucune équipe n'a été trouvée</p>
+    </div>
+</div>
+
+<!-- add equipe -->
+<p-dialog header="Ajouter une nouvelle équipe" [(visible)]="displayAddTeamDialog" [modal]="true"
+    [style]="{width: '70vw'}" [draggable]="true" appendTo="body">
+
+
+    <div>
+        <form [formGroup]="newTeamForm">
+            <div class="bg-white px-4 sm:py-2">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="col-span-4 sm:col-span-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nom de l'équipe</label>
+                        <input pInputText type="text" name="name" id="name" autocomplete="cc-given-name"
+                            formControlName="name"
+                            class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white px-4 sm:py-2">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="col-span-4 sm:col-span-4">
+                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                        <input pInputText type="text" name="description" id="description" autocomplete="cc-given-name"
+                            formControlName="description"
+                            class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white px-4 sm:py-2">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="col-span-4 sm:col-span-4">
+                        <label for="members" class="block text-sm font-medium text-gray-700">Liste des
+                            membres</label>
+                        <p-multiSelect [options]="allUsers" formControlName="members" optionLabel="fullname"
+                            selectedItemsLabel="{0} membres sélectionnés" optionValue="id"
+                            defaultLabel="Sélectionner les membres" appendTo="body" [style]="{width: '100%'}"
+                            [filter]="true"></p-multiSelect>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <ng-template pTemplate="footer">
+        <button type="button" (click)="submitNewTeam()"
+            class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            [ngClass]="{ 'opacity-50 cursor-not-allowed': newTeamForm.invalid }"
+            [disabled]="newTeamForm.invalid">Ajouter</button>
+
+    </ng-template>
+
+
+
+</p-dialog>
+
+
+<!-- modif equipe -->
+<p-dialog header="Ajouter nouvelle équipe" [(visible)]="displayEditTeamDialog" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="true" appendTo="body">
+    <p>TODO: Modifier une équipe</p>
+</p-dialog>
+
+<!-- team members -->
+<p-dialog header="Membres de l'équipe" [(visible)]="displayTeamMembersDialog" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="true" appendTo="body">
+
+
+    <div>
+        <div class="flow-root mt-6">
+            <ul role="list" class="-my-5 divide-y divide-gray-200">
+                <li class="py-4" *ngFor="let user of teamMembers">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                            <!-- <img class="h-8 w-8 rounded-full" [src]="user.avatar" alt=""> -->
+
+                            <span class="inline-flex items-center justify-center h-8 w-8 rounded-full"
+                                [ngClass]="generateRandomColor(user?.lastname.charAt(0))">
+                                <span class="text-sm font-medium leading-none text-white">{{
+                                    user?.firstname.charAt(0) }}{{ user?.lastname.charAt(0)
+                                    }}</span>
+                            </span>
+
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate">{{ user.firstname }} {{
+                                user.lastname }}</p>
+                            <p class="text-sm text-gray-500 truncate">{{ user.email }}</p>
+                        </div>
+                        <div>
+                            <a (click)="displayUserDetails(user)"
+                                class="inline-flex items-center cursor-pointer shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                                Détails </a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="py-4" *ngIf="teamMembers.length == 0">
+                    <p class="text-sm font-medium text-gray-900 text-center">Aucun membre dans cette équipe</p>
+                </li>
+
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</p-dialog>

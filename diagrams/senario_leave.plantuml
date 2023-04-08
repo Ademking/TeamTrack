@@ -1,0 +1,59 @@
+@startuml  Demande de congés
+actor Employé
+actor Administrateur
+autonumber "<b>#:"
+skinparam style strictuml
+participant "Application" as SGE
+
+title Demande de congés
+
+Employé -> SGE: S'autentifier
+activate Employé
+activate SGE
+SGE --> Employé: Autorisation accordée
+deactivate Employé
+deactivate SGE
+
+
+Employé -> SGE: Ouvrir la page de demande de congés
+activate Employé
+activate SGE
+SGE --> Employé: Afficher la page de demande de congés
+deactivate SGE
+
+
+Employé -> SGE: Remplir et Envoyer la demande
+activate SGE
+SGE --> Employé: Afficher un message de succès ou d'erreur
+deactivate Employé
+
+
+SGE --> Administrateur: Avis de demande de congés
+activate Administrateur
+deactivate SGE
+
+
+Administrateur -> SGE: Ouvrir la liste des demandes de congés
+activate SGE
+
+SGE --> Administrateur: Afficher la liste des demandes de congés
+
+
+Administrateur -> SGE: Valider/Refuser une demande de congés
+
+SGE --> Administrateur: Afficher un message de succès ou d'erreur
+
+
+deactivate Administrateur
+deactivate SGE
+
+
+
+Employé -> SGE: Consulter ses congés
+activate Employé
+activate SGE
+SGE --> Employé: Afficher la page de demande de congés
+deactivate SGE
+deactivate Employé
+
+@enduml
