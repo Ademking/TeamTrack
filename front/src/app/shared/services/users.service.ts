@@ -17,4 +17,8 @@ export class UsersService {
     public deleteUser(userId: string) {
         return this.httpClient.delete(environment.API_URL + '/api/v1/employees/delete/' + userId);
     }
+
+    public updateUser(userId: string, user: any) {
+        return this.httpClient.put(environment.API_URL + '/api/v1/employees/update/' + userId, user);
+    }
 }

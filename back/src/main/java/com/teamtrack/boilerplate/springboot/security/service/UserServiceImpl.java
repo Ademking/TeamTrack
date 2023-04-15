@@ -77,8 +77,7 @@ public class UserServiceImpl implements UserService {
 	public User updateUser(Long userId, User user) {
 		// get user
 		User userToUpdate = userRepository.findById(userId).orElseThrow(
-				() -> new RuntimeException("User not found with id: " + userId)
-		);
+				() -> new RuntimeException("User not found with id: " + userId));
 		// update user
 		userToUpdate.setFirstname(user.getFirstname());
 		userToUpdate.setLastname(user.getLastname());
@@ -88,7 +87,11 @@ public class UserServiceImpl implements UserService {
 		userToUpdate.setGender(user.getGender());
 		userToUpdate.setBirthdate(user.getBirthdate());
 		userToUpdate.setJoinDate(user.getJoinDate());
-
+		if (user.getTeam() != null) {
+			userToUpdate.setTeam(user.getTeam());
+		} else {
+			userToUpdate.setTeam(null);
+		}
 		return userRepository.save(userToUpdate);
 	}
 
@@ -103,5 +106,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User addUser(User user) {
 		return userRepository.save(user);
+	}
+
+	@Override
+	public List<User> getUsersByIds(List<Long> userIds) {
+		return userRepository.findAllById(userIds);
+	}
+
+	@Override
+	public User getUserById(Long userId) {
+		return userRepository.findById(userId).orElseThrow(
+				() -> new RuntimeException("User not found with id: " + userId));
 	}
 }

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import 'ag-grid-community/styles/ag-grid.css';
 @import 'ag-grid-community/styles/ag-theme-alpine.css';
 
@@ -76,3 +77,23 @@ body {
   font-size: 15px;
 }
 
+.ag-pinned-right-cols-container {
+  border-left: 1px solid #d6dee1;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.ag-horizontal-right-spacer {
+  opacity: 0;
+}
+
+.p-editor-toolbar, .ql-container {
+  font-family: 'Work Sans', sans-serif !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.revert-me {
+  all: revert;
+}

@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { RoleGuard } from './role.guard';
 import { ErrorsInterceptor } from './errors.interceptor';
 
 @NgModule({
@@ -20,6 +21,9 @@ import { ErrorsInterceptor } from './errors.interceptor';
       provide: AuthGuard,
     },
     {
+      provide: RoleGuard,
+    },
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
@@ -28,7 +32,7 @@ import { ErrorsInterceptor } from './errors.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorsInterceptor,
       multi: true
-   }
+    }
   ],
 })
 export class CoreModule { }

@@ -17,18 +17,12 @@ class Employees {
     -date_of_joining: date
     -is_admin: boolean
     -employee_code: string
-    -leaves: Leave[]
-    -missions: Mission[]
-    -formations: Formation[]
 }
 
 class Teams {
     -id: int
     -name: string
     -description: string
-    -employees: Employee[]
-    +addEmployee(employee: Employee): void
-    +removeEmployee(employee: Employee): void
 }
 
 class Leaves {
@@ -39,8 +33,6 @@ class Leaves {
     -reason: string
     -comment: string
     -status: string
-    +demandLeave(): void
-    +changeLeaveStatus(): void
 }
 
 class Missions {
@@ -50,10 +42,6 @@ class Missions {
     -start_date: date
     -end_date: date
     -status: string
-    +assignEmployee(employee: Employee): void
-    +unassignEmployee(employee: Employee): void
-    +startMission(): void
-    +endMission(): void
 }
 
 class ForumPosts {
@@ -63,10 +51,6 @@ class ForumPosts {
     -content: string
     -created_at: date
     -created_by: Employee
-    -comments: Comment[]
-    +addComment(): void
-    +editComment(): void
-    +deleteComment(): void
 }
 
 class Trainings {
@@ -77,10 +61,6 @@ class Trainings {
     -duration: int
     -location: string
     -status: string
-    +edit(): void
-    +delete(): void
-    +register(employee: Employee): void
-    +cancelRegistration(employee: Employee): void
 }
 
 class ForumComments {

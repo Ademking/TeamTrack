@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -29,7 +30,7 @@ public class Formation {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String description;
     private LocalDate date;
@@ -38,7 +39,7 @@ public class Formation {
     private String status;
 
     @ManyToMany(mappedBy = "formations")
-    private Set<User> employees;
+    private List<User> employees;
 
     @CreatedDate
 	@Column(nullable = false, updatable = false)

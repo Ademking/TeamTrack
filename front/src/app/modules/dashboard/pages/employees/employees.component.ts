@@ -151,10 +151,37 @@ export class EmployeesComponent implements OnInit {
     }]),
     job: new FormControl('', Validators.required),
     code: new FormControl('', Validators.required),
-    team: new FormControl('', Validators.required),
+    team: new FormControl(''),
     //avatar: new FormControl('', Validators.required),
     date_of_birth: new FormControl('', Validators.required),
     date_of_hiring: new FormControl('', Validators.required),
+  });
+
+
+  editEmployee = new FormGroup({
+    gender: new FormControl({}, Validators.required),
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    phone: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    // password: new FormControl('', Validators.required),
+    // // custom validator to check if the password and the confirmation are the same
+    // password_confirmation: new FormControl('', [Validators.required, (control: FormControl) => {
+    //   if (control.value !== this.newEmployee?.get('password')?.value) {
+    //     return { password_confirmation: true };
+    //   }
+    //   return null;
+    // }]),
+    job: new FormControl('', Validators.required),
+    code: new FormControl('', Validators.required),
+    team: new FormControl(''),
+    //avatar: new FormControl('', Validators.required),
+    date_of_birth: new FormControl(new Date(), Validators.required),
+    date_of_hiring: new FormControl(new Date(), Validators.required),
   });
 
   genders = [{ name: 'Homme', value: 'm' }, { name: 'Femme', value: 'f' }];
@@ -175,7 +202,9 @@ export class EmployeesComponent implements OnInit {
         password: this.newEmployee.value.password,
         job: this.newEmployee.value.job,
         employeeCode: this.newEmployee.value.code,
-        team: this.newEmployee.value.team,
+        team:this.newEmployee.value.team == null ? null : {
+          id: this.newEmployee.value.team,
+        },
         birthdate: this.newEmployee.value.date_of_birth,
         joinDate: this.newEmployee.value.date_of_hiring,
 
@@ -189,6 +218,35 @@ export class EmployeesComponent implements OnInit {
     else {
       // console.log what's wrong
       console.log(this.newEmployee);
+    }
+  }
+
+
+  submitEditEmployee() {
+    if (this.editEmployee.valid) {
+      // selected user id
+      let user_id = this.selectedUser.id;
+      // submit
+      this.usersService.updateUser(user_id, {
+        firstname: this.editEmployee.value.firstname,
+        lastname: this.editEmployee.value.lastname,
+        phone: this.editEmployee.value.phone,
+        address: this.editEmployee.value.address,
+        gender: (<any>this.editEmployee.value.gender).value,
+        email: this.editEmployee.value.email,
+        job: this.editEmployee.value.job,
+        employeeCode: this.editEmployee.value.code,
+        team: this.editEmployee.value.team == null ? null : {
+          id: this.editEmployee.value.team,
+        },
+        birthdate: this.editEmployee.value.date_of_birth,
+        joinDate: this.editEmployee.value.date_of_hiring,
+      }).subscribe((user: any) => {
+        this.msg.success('Employé modifié avec succès');
+        this.getUsers();
+        this.displayEditnewEmployeeDialog = false;
+        this.selectedUser = null;
+      })
     }
   }
 
@@ -208,6 +266,7 @@ export class EmployeesComponent implements OnInit {
       message: 'Etes-vous sûr de vouloir supprimer cet employé ?',
       accept: () => {
         this.usersService.deleteUser(userId).subscribe(() => {
+          this.msg.success('Employé supprimé avec succès');
           this.selectedUser = null;
           this.getUsers();
         })
@@ -217,6 +276,26 @@ export class EmployeesComponent implements OnInit {
       },
       acceptLabel: 'Oui',
       rejectLabel: 'Non',
+    })
+  }
+
+  displayEditnewEmployeeDialog = false;
+
+  openEditUserDialog(user: any) {
+
+    this.displayEditnewEmployeeDialog = true;
+    this.editEmployee.patchValue({
+      gender: this.genders.filter(g => g.value === user.gender)[0],
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      phone: user.phone,
+      address: user.address,
+      job: user.job,
+      code: user.employeeCode,
+      team: user.team ? user.team.id : null,
+      date_of_birth: new Date(user.birthdate),
+      date_of_hiring: new Date(user.joinDate),
     })
   }
 }

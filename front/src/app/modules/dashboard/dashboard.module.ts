@@ -17,6 +17,7 @@ import { TeamsComponent } from './pages/employees/components/teams/teams.compone
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DemandeCongeComponent } from './pages/demande-conge/demande-conge.component';
 import { MesDemandesCongeComponent } from './pages/mes-demandes-conge/mes-demandes-conge.component';
+import { ForumPostDetailsComponent } from './pages/forum-post-details/forum-post-details.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MesDemandesCongeComponent } from './pages/mes-demandes-conge/mes-demand
     TeamsComponent,
     DashboardComponent,
     DemandeCongeComponent,
-    MesDemandesCongeComponent
+    MesDemandesCongeComponent,
+    ForumPostDetailsComponent
   ],
   imports: [
     CommonModule,

@@ -13,6 +13,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 @Getter
 @Setter
 @Entity
@@ -24,15 +26,17 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class ForumPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String title;
     private String category;
+
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
-    private LocalDate created_at;
 
     // User who created the post
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by_id")
+    @JsonIncludeProperties(value = {"id", "firstname", "lastname", "email"})
     private User user;
 
     // Comments which belong to the post

@@ -13,11 +13,21 @@ import com.teamtrack.boilerplate.springboot.security.dto.RegistrationResponse;
 public interface UserService {
 
 	User findByEmail(String email);
+
 	RegistrationResponse registration(RegistrationRequest registrationRequest);
+
 	AuthenticatedUserDto findAuthenticatedUserByEmail(String email);
-    List<User> getAllUsers();
+
+	List<User> getAllUsers();
+
 	User updateUser(Long userId, User user);
+
 	void deleteUser(Long userId);
+
 	User addUser(User user);
+
+	List<User> getUsersByIds(List<Long> userIds);
+
+	User getUserById(Long userId);
 
 }

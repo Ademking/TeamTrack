@@ -8,6 +8,9 @@ export class AuthInterceptor implements HttpInterceptor {
   
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+
+    // if response is 401, redirect to login page
+
     const accessToken = this.authService.getAccessToken();
     req = req.clone({
       setHeaders: {

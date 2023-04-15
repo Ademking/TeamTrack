@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 /**
  * @author TeamTrack SESAME
@@ -51,29 +53,29 @@ public class User {
 	// Many to many relationship with Mission
 	@ManyToMany
 	@JoinTable(name = "user_missions", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "mission_id"))
-	private Set<Mission> missions;
+	private List<Mission> missions;
 
 	// One to many relationship with Leave
 	@OneToMany(mappedBy = "user")
-	private Set<Leave> leaves;
+	private List<Leave> leaves;
 
 	// Many to many relationship with Formation
 	@ManyToMany
 	@JoinTable(name = "user_formations", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "formation_id"))
-	private Set<Formation> formations;
+	private List<Formation> formations;
 
 	// One to many relationship with Announcement
 	@OneToMany(mappedBy = "user")
-	private Set<Announcement> announcements;
+	private List<Announcement> announcements;
 
 	// One to many relationship with ForumPost
 	@OneToMany(mappedBy = "user")
-	private Set<ForumPost> forumPosts;
+	private List<ForumPost> forumPosts;
 
 	// One to many relationship with Team
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
-	@JsonIgnore
+	@JsonIncludeProperties(value = {"id", "name"})
     private Team team;
 
 	@CreatedDate

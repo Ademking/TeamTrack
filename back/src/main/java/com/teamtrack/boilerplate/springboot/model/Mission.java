@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -11,6 +12,8 @@ import javax.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 /**
  * @author TeamTrack SESAME
@@ -37,7 +40,8 @@ public class Mission {
     private MissionStatus missionStatus;
 
     @ManyToMany(mappedBy = "missions")
-    private Set<User> employees;
+    @JsonIncludeProperties(value = {"id", "firstname", "lastname", "email"})
+    private List<User> employees;
 
     @CreatedDate
 	@Column(nullable = false, updatable = false)

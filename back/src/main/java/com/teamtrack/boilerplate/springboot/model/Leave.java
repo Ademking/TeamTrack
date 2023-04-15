@@ -12,6 +12,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 @Getter
 @Setter
 @Entity
@@ -23,7 +25,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Leave {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
     @Enumerated(EnumType.STRING)
@@ -36,6 +38,7 @@ public class Leave {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIncludeProperties(value = {"id", "firstname", "lastname", "email"})
     private User user;
 
     @CreatedDate

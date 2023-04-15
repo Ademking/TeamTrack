@@ -1,0 +1,226 @@
+<header class="bg-gray-50 py-8">
+    <div class=" mx-auto px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
+        <div class="flex-1 min-w-0">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div>
+                            <a href="#" class="text-sm font-medium text-gray-500 hover:text-gray-700">Accueil</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <!-- Heroicon name: solid/chevron-right -->
+                            <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <a [routerLink]="['/dashboard/forum']"
+                                class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Forum</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <!-- Heroicon name: solid/chevron-right -->
+                            <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <a 
+                                class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ postDetails?.category }}</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Forum</h1>
+            <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-8">
+                <div class="mt-2 flex items-center text-sm text-gray-500">
+                    <!-- Heroicon name: solid/briefcase -->
+                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                            clip-rule="evenodd" />
+                        <path
+                            d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                    </svg>
+                    Posez vos questions / Répondez aux questions des autres
+                </div>
+
+            </div>
+        </div>
+        <div class="mt-5 flex xl:mt-0 xl:ml-4">
+
+        </div>
+    </div>
+</header>
+
+
+
+<main class="py-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <!-- post -->
+        <section *ngIf="!isPageLoading" aria-labelledby="applicant-information-title">
+            <div class="bg-white shadow sm:rounded-lg">
+                <div class="px-4 py-5 sm:px-6">
+                    <h2 id="applicant-information-title" class="text-lg leading-6 font-medium text-gray-900">
+                        {{ postDetails?.title }}
+                    </h2>
+
+
+                    <p class="mt-1 text-sm text-gray-500 pt-1">
+                        <span
+                            class="rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-800 mr-2">{{
+                            postDetails?.category}}</span>
+                        Publié par <strong>{{ postDetails?.user.firstname + ' ' + postDetails?.user.lastname }}</strong>
+                        le {{
+                        postDetails?.dateCreated | date: 'dd/MM/yyyy à HH:mm' }} <span
+                            class="text-gray-500 font-medium">·</span> ({{ postDetails?.dateCreated | fromNow }})
+                    </p>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                    <div class="ql-container ql-snow no-padding" style="border-width: 0;">
+                        <div class="ql-editor no-padding all-initial" [innerHTML]="postDetails?.content | safeHtml">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- comments -->
+        <section *ngIf="!isPageLoading" aria-labelledby="notes-title" class="pt-6">
+            <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle">
+            </p-confirmDialog>
+            <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
+                <div class="divide-y divide-gray-200">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h2 id="notes-title" class="text-lg font-medium text-gray-900">{{postDetails?.comments.length}}
+                            Commentaires</h2>
+                    </div>
+                    <div class="px-4 py-6 sm:px-6" *ngIf="postDetails?.comments.length > 0">
+                        <ul role="list" class="space-y-8">
+
+                            <li *ngFor="let comment of postDetails?.comments">
+                                <div class="flex space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <span class="inline-flex items-center justify-center h-10 w-10 rounded-full"
+                                            [ngClass]="generateRandomColor(comment?.created_by?.lastname.charAt(0))">
+                                            <span
+                                                class="text-xl font-medium leading-none text-white">{{comment?.created_by?.firstname.charAt(0)
+                                                }}{{comment?.created_by?.lastname.charAt(0)}}</span>
+                                        </span>
+
+                                    </div>
+                                    <div>
+                                        <div class="text-sm">
+                                            <a href="#"
+                                                class="font-medium text-gray-900">{{comment?.created_by.firstname + ' '
+                                                + comment?.created_by.lastname}}</a>
+                                        </div>
+                                        <div class="mt-1 text-sm text-gray-700">
+                                            <div class="ql-container ql-snow no-padding" style="border-width: 0;">
+                                                <div class="ql-editor no-padding all-initial" [innerHTML]="comment?.content | safeHtml">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 text-sm space-x-2">
+                                            <span class="text-gray-500 font-medium">{{ comment?.dateCreated | fromNow
+                                                }}</span>
+                                            <!-- space -->
+                                            <span class="text-gray-500 font-medium"
+                                                *ngIf="myId == comment?.created_by.id">·</span>
+                                            <!-- space -->
+                                            <button type="button" class="text-gray-900 font-medium"
+                                                (click)="deleteMyComment(comment?.id)"
+                                                *ngIf="myId == comment?.created_by.id">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor"
+                                                    class="w-4 h-4 text-gray-500 -mt-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                </svg>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-6 sm:px-6">
+                    <div class="flex space-x-3">
+                        <div class="flex-shrink-0">
+
+                            <span class="inline-flex items-center justify-center h-10 w-10 rounded-full"
+                                [ngClass]="generateRandomColor(myInfo?.lastname.charAt(0))">
+                                <span class="text-xl font-medium leading-none text-white">{{myInfo?.firstname.charAt(0)
+                                    }}{{myInfo?.lastname.charAt(0)}}</span>
+                            </span>
+
+
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <form [formGroup]="commentForm">
+                                <div>
+                                    <label for="comment" class="sr-only">About</label>
+                                    <!-- <textarea id="comment" name="comment" rows="3" formControlName="comment"
+                                        class="shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
+                                        placeholder="Votre commentaire"></textarea> -->
+
+                                    <p-editor class="revert-me prose prose-lg" formControlName="comment"
+                                        [style]="{'height':'200px'}"></p-editor>
+                                </div>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <a (click)="commentForm.reset()"
+                                        class="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900 cursor-pointer">
+
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                        </svg>
+
+
+                                    </a>
+                                    <button type="button" (click)="submitComment()"
+                                        class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        Ajouter votre commentaire
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading -->
+        <p *ngIf="isPageLoading" class="text-center text-gray-500 text-sm">
+
+
+            <svg class="inline h-6 w-6 animate-spin mr-3" viewBox="3 3 18 18">
+                <path class="fill-gray-200"
+                    d="M12 5C8.13401 5 5 8.13401 5 12c0 3.866 3.13401 7 7 7 3.866.0 7-3.134 7-7 0-3.86599-3.134-7-7-7zM3 12c0-4.97056 4.02944-9 9-9 4.9706.0 9 4.02944 9 9 0 4.9706-4.0294 9-9 9-4.97056.0-9-4.0294-9-9z">
+                </path>
+                <path class="fill-gray-800"
+                    d="M16.9497 7.05015c-2.7336-2.73367-7.16578-2.73367-9.89945.0-.39052.39052-1.02369.39052-1.41421.0-.39053-.39053-.39053-1.02369.0-1.41422 3.51472-3.51472 9.21316-3.51472 12.72796.0C18.7545 6.02646 18.7545 6.65962 18.364 7.05015c-.390599999999999.39052-1.0237.39052-1.4143.0z">
+                </path>
+            </svg>
+            Chargement...
+
+
+
+        </p>
+    </div>
+</main>

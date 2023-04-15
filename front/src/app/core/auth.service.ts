@@ -36,7 +36,7 @@ export class AuthService {
 
         if (res.user.userRole == 'ROLE_EMPLOYEE') {
           this.msg.success("Bienvenue " + res.user.firstname);
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['/dashboard/'])
         }
         else if (res.user.userRole == 'ROLE_ADMIN') {
           this.router.navigate(['dashboard/admin'])
@@ -76,5 +76,18 @@ export class AuthService {
     return user.userRole;
   }
 
+  isAdmin() {
+    console.log(this.userRole() === 'ROLE_ADMIN');
+    return this.userRole() === 'ROLE_ADMIN';
+  }
+
+  isEmployee() {
+    return this.userRole() === 'ROLE_EMPLOYEE';
+  }
+
+  getUserId() {
+    let user = this.getCurrentUser();
+    return user.id;
+  }
 
 }

@@ -19,14 +19,18 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { TooltipModule } from 'primeng/tooltip';
+import { ListboxModule } from 'primeng/listbox';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { EditorModule } from 'primeng/editor';
+
 
 import { ConfirmationService } from 'primeng/api';
 
 import { TemplateRendererComponent } from './components/template-renderer.component';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { FromNowPipe } from './pipes/from-now.pipe';
 
 const DIRECTIVES = [
   HasRoleDirective
@@ -38,7 +42,8 @@ const COMPONENTS = [
 ];
 
 const PIPES = [
-  SafeHtmlPipe
+  SafeHtmlPipe,
+  FromNowPipe,
 ];
 
 const SERVICES = [
@@ -67,6 +72,8 @@ const MODULES = [
   ConfirmDialogModule,
   TooltipModule,
   MultiSelectModule,
+  EditorModule,
+  ListboxModule,
   HotToastModule.forRoot(
     {
       position: 'top-right',

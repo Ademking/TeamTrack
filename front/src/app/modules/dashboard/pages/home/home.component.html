@@ -12,10 +12,10 @@
                             <div class="sm:flex sm:space-x-5">
                                 <div class="flex-shrink-0">
 
-                                    <span class="inline-flex items-center justify-center h-16 w-16 rounded-full"
-                                        [ngClass]="generateRandomColor(user?.lastname.charAt(0))">
-                                        <span class="text-xl font-medium leading-none text-white">{{
-                                            user?.firstname.charAt(0) }}{{ user?.lastname.charAt(0)
+                                    <span *ngIf="user" class="inline-flex items-center justify-center h-16 w-16 rounded-full"
+                                        [ngClass]="generateRandomColor(user?.lastname?.charAt(0))">
+                                        <span class="text-xl font-medium leading-nonezz text-white">{{
+                                            user?.firstname?.charAt(0) }}{{ user?.lastname?.charAt(0)
                                             }}</span>
                                     </span>
                                 </div>
@@ -205,7 +205,7 @@
                                                 📌 {{ annonce.title }}
                                             </a>
                                         </h3>
-                                        <p class="mt-1 text-sm text-gray-600 line-clamp-2">{{ annonce.description }}</p>
+                                        <p class="mt-1 text-sm text-gray-600 line-clamp-2">{{ annonce.content }}</p>
                                     </div>
                                 </li>
 

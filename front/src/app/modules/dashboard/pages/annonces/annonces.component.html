@@ -42,7 +42,7 @@
         <div class="mt-5 flex xl:mt-0 xl:ml-4">
 
             <span class=" sm:block">
-                <button type="button" (click)="showDialog()"
+                <button type="button" (click)="showNewDialog()"
                     class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -51,7 +51,6 @@
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
-
                     Ajouter
                 </button>
             </span>
@@ -67,13 +66,38 @@
             <div class="table-height">
 
 
+
+                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle">
+                </p-confirmDialog>
+                
                 <ag-grid-angular style="width: 100%; height: 70vh;" class="ag-theme-alpine" [gridOptions]="gridOptions">
                 </ag-grid-angular>
+
+                <ng-template #contentElem let-row>
+
+
+                    <span class=" sm:block">
+                        <button type="button" (click)="showDetailsDialog(row)"
+                            class="inline-flex items-center px-2 py-1 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="-ml-1 mr-2 h-5 w-5 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Voir Détails
+                        </button>
+                    </span>
+
+                </ng-template>
 
 
                 <ng-template #actions let-row>
                     <span class="relative z-0 inline-flex shadow-sm rounded-md">
-                        <button type="button" pTooltip="Détails" tooltipPosition="bottom" appendTo="body"
+                        <button (click)="showDetailsDialog(row)" type="button" pTooltip="Détails"
+                            tooltipPosition="bottom" appendTo="body"
                             class="relative inline-flex items-center px-2 py-1 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="h-5 w-5 text-gray-500">
@@ -83,7 +107,8 @@
                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                         </button>
-                        <button type="button" pTooltip="Modifier" tooltipPosition="bottom" appendTo="body"
+                        <button (click)="showEditDialog(row)" type="button" pTooltip="Modifier" tooltipPosition="bottom"
+                            appendTo="body"
                             class="-ml-px relative inline-flex items-center px-2 py-1 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="h-5 w-5 text-gray-500">
@@ -91,7 +116,7 @@
                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                             </svg>
                         </button>
-                        <button type="button" pTooltip="Supprimer" tooltipPosition="bottom" appendTo="body"
+                        <button (click)="deleteAnnonce(row.id)" type="button" pTooltip="Supprimer" tooltipPosition="bottom" appendTo="body"
                             class="-ml-px relative inline-flex items-center px-2 py-1 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="h-5 w-5 text-red-500">
@@ -112,16 +137,12 @@
 
 <app-footer></app-footer>
 
-<p-dialog header="Créer une nouvelle annonce" [(visible)]="displayNewAnnonce" [responsive]="true" [modal]="true"
+<!-- Add new annonce -->
+<p-dialog header="Créer une nouvelle annonce" [(visible)]="displayNewAnnonce" [modal]="true"
     [style]="{width: '60vw'}">
-
     <div>
-
         <div class="mt-1">
             <form [formGroup]="newAnnonceForm">
-
-
-
                 <div class="mb-3">
                     <label for="title" class="block text-sm font-medium text-gray-700">Titre de l'annonce</label>
                     <div class="mt-1">
@@ -134,16 +155,12 @@
                 <div class="mb-3">
                     <label for="details" class="block text-sm font-medium text-gray-700">Détails</label>
                     <div class="mt-1">
-                        <textarea rows="8" name="annonce" id="annonce" formControlName="annonce"
+                        <p-editor formControlName="content" [style]="{'height':'320px'}"></p-editor>
+                        <!-- <textarea rows="8" name="annonce" id="annonce" formControlName="content"
                             placeholder="Détails de l'annonce"
-                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea> -->
                     </div>
                 </div>
-
-
-
-
-
             </form>
         </div>
     </div>
@@ -152,7 +169,71 @@
             class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             [ngClass]="{ 'opacity-50 cursor-not-allowed': newAnnonceForm.invalid }"
             [disabled]="newAnnonceForm.invalid">Ajouter</button>
-
     </ng-template>
+</p-dialog>
 
+
+
+
+<!-- Edit annonce -->
+<p-dialog header="Modifier annonce" [(visible)]="displayEditAnnonce"  [modal]="true"
+    [style]="{width: '60vw'}">
+    <div>
+        <div class="mt-1">
+            <form [formGroup]="editAnnonceForm">
+                <div class="mb-3">
+                    <label for="title" class="block text-sm font-medium text-gray-700">Titre de l'annonce</label>
+                    <div class="mt-1">
+                        <input type="text" name="title" formControlName="title"
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Titre de l'annonce">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="details" class="block text-sm font-medium text-gray-700">Détails</label>
+                    <div class="mt-1">
+                        <p-editor formControlName="content" [style]="{'height':'320px'}"></p-editor>
+                        <!-- <textarea rows="8" name="annonce" id="annonce" formControlName="content"
+                            placeholder="Détails de l'annonce"
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" (click)="submitEditAnnounce()"
+            class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            [ngClass]="{ 'opacity-50 cursor-not-allowed': editAnnonceForm.invalid }"
+            [disabled]="editAnnonceForm.invalid">Modifier</button>
+    </ng-template>
+</p-dialog>
+
+
+<!-- Details -->
+<p-dialog header="Modifier annonce" [(visible)]="displayDetailsAnnonce"  [modal]="true"
+    [style]="{width: '60vw'}">
+
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+        <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">
+                Titre
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                {{ selectedAnnonce?.title }}
+            </dd>
+        </div>
+        <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">
+                Détails
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                <div class="ql-container ql-snow" style="border-width: 0;">
+                    <div class="ql-editor" [innerHTML]="selectedAnnonce?.content">
+                    </div>
+                </div>
+            </dd>
+        </div>
+    </dl>
 </p-dialog>

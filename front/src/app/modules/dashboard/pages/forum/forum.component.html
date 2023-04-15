@@ -49,20 +49,130 @@
 <div class="min-h-full px-4 py-4">
 
     <div class="max-w-3xl mx-auto  lg:max-w-7xl  lg:grid lg:grid-cols-12 lg:gap-8">
-      
+
         <main class="lg:col-span-9 xl:col-span-9">
 
             <div class="mt-4">
-
-                <ul role="list" class="space-y-4">
-                    <li app-forum-card></li>
-                    <li app-forum-card></li>
-                    <li app-forum-card></li>
-                    <li app-forum-card></li>
-                    <li app-forum-card></li>
-
-
+                <!-- content -->
+                <ul role="list" class="space-y-4" *ngIf="filtredPosts.length > 0 && isLoading == false">
+                    <ng-container *ngFor="let post of filtredPosts">
+                        <li app-forum-card [forumPost]="post"
+                            class="cursor-pointer hover:border-gray-300 hover:shadow-lg hover:z-10">
+                    </ng-container>
                 </ul>
+                <!-- empty state -->
+                <ul role="list" class="space-y-4" *ngIf="filtredPosts.length == 0 && isLoading == false">
+                    <li class="grid grid-cols-1 gap-4 py-10">
+                        <svg class="place-self-center	 w-40 h-40" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" x="0" y="0"
+                            viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve">
+                            <g>
+                                <linearGradient id="a">
+                                    <stop offset="0" stop-color="#cadcf0"></stop>
+                                    <stop offset="1" stop-color="#a4bbdb"></stop>
+                                </linearGradient>
+                                <linearGradient xlink:href="#a" id="d" x1="0" x2="1" y1="0" y2="0"
+                                    gradientTransform="matrix(40 0 0 25.912 12 48.573)" gradientUnits="userSpaceOnUse">
+                                </linearGradient>
+                                <linearGradient id="b">
+                                    <stop offset="0" stop-color="#a4bbdb"></stop>
+                                    <stop offset="1" stop-color="#8da3be"></stop>
+                                </linearGradient>
+                                <linearGradient xlink:href="#b" id="e" x1="0" x2="1" y1="0" y2="0"
+                                    gradientTransform="matrix(20.086 0 0 25.912 31.914 48.573)"
+                                    gradientUnits="userSpaceOnUse"></linearGradient>
+                                <linearGradient id="c">
+                                    <stop offset="0" stop-color="#e9f3fc"></stop>
+                                    <stop offset="1" stop-color="#cadcf0"></stop>
+                                </linearGradient>
+                                <linearGradient xlink:href="#c" id="f" x1="0" x2="1" y1="0" y2=".337"
+                                    gradientTransform="matrix(14.679 14.768 -21.492 8.973 12.133 35.609)"
+                                    gradientUnits="userSpaceOnUse"></linearGradient>
+                                <linearGradient xlink:href="#c" id="g" x1="0" x2="1" y1="0" y2=".227"
+                                    gradientTransform="matrix(25.743 1.634 -3.837 17.203 32.081 42.038)"
+                                    gradientUnits="userSpaceOnUse"></linearGradient>
+                                <linearGradient xlink:href="#c" id="h" x1="0" x2="1" y1="0" y2="-.619"
+                                    gradientTransform="matrix(20.007 -6.501 5.236 7.762 9.382 31.736)"
+                                    gradientUnits="userSpaceOnUse"></linearGradient>
+                                <linearGradient xlink:href="#c" id="i" x1="0" x2="1" y1="0" y2=".429"
+                                    gradientTransform="matrix(15.249 13.945 -20.61 7.651 37.354 21.357)"
+                                    gradientUnits="userSpaceOnUse"></linearGradient>
+                                <linearGradient xlink:href="#a" id="j" x1="0" x2="1" y1="0" y2="0"
+                                    gradientTransform="matrix(40 0 0 13 12 35.606)" gradientUnits="userSpaceOnUse">
+                                </linearGradient>
+                                <linearGradient xlink:href="#b" id="k" x1="0" x2="1" y1="0" y2="0"
+                                    gradientTransform="scale(16.159) rotate(88.472 .138 1.974)"
+                                    gradientUnits="userSpaceOnUse"></linearGradient>
+                                <linearGradient id="l" x1="0" x2="1" y1="0" y2="0"
+                                    gradientTransform="rotate(49.719 3.124 26.068) scale(30.507)"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop offset="0" stop-color="#559aff"></stop>
+                                    <stop offset="1" stop-color="#2e69ef"></stop>
+                                </linearGradient>
+                                <linearGradient xlink:href="#c" id="m" x1="0" x2="1" y1="0" y2="0"
+                                    gradientTransform="matrix(6.695 0 0 4.448 30.933 4.607)"
+                                    gradientUnits="userSpaceOnUse"></linearGradient>
+                                <linearGradient xlink:href="#c" id="n" x1="0" x2="1" y1="0" y2="0"
+                                    gradientTransform="matrix(6.695 0 0 -4.448 30.933 10.607)"
+                                    gradientUnits="userSpaceOnUse"></linearGradient>
+                                <path fill="url(#d)"
+                                    d="M52 35.617H12v18.512a2 2 0 0 0 1.425 1.916l18 5.4a2.01 2.01 0 0 0 1.15 0l18-5.4A2 2 0 0 0 52 54.129V35.617z"
+                                    data-original="url(#d)"></path>
+                                <path fill="url(#e)"
+                                    d="M52 35.617H32s-.194 25.912 0 25.912.387-.028.575-.084l18-5.4A2 2 0 0 0 52 54.129V35.617z"
+                                    data-original="url(#e)"></path>
+                                <path fill="url(#f)"
+                                    d="m32 42.106-20-6.489-5.075 7.524a1 1 0 0 0 .52 1.511l17.995 5.846a1 1 0 0 0 1.137-.39L32 42.106z"
+                                    data-original="url(#f)"></path>
+                                <path fill="url(#g)"
+                                    d="m52 35.617-20 6.489 5.423 8.002a1 1 0 0 0 1.137.39l17.995-5.846a1 1 0 0 0 .52-1.511L52 35.617z"
+                                    data-original="url(#g)"></path>
+                                <path fill="url(#h)"
+                                    d="M27.159 21.986a1 1 0 0 0-1.136-.388L8.027 27.445a.998.998 0 0 0-.52 1.51L12 35.617l20-6.511-4.841-7.12z"
+                                    data-original="url(#h)" class=""></path>
+                                <path fill="url(#i)"
+                                    d="M56.493 28.955a1 1 0 0 0-.52-1.51l-17.996-5.847a1 1 0 0 0-1.136.388L32 29.106l20 6.511 4.493-6.662z"
+                                    data-original="url(#i)"></path>
+                                <path fill="url(#j)" d="m52 35.617-20-6.511-20 6.511 20 6.489z" data-original="url(#j)">
+                                </path>
+                                <path fill="url(#k)" d="M32 42.106v-13l-20 6.511z" data-original="url(#k)"></path>
+                                <g fill="url(#l)">
+                                    <path
+                                        d="M27.982 31.978a8.757 8.757 0 0 1-1.124-.868 1 1 0 0 0-1.352 1.473c.409.376.87.734 1.382 1.069a1 1 0 0 0 1.094-1.674zM24.866 28.906a8.689 8.689 0 0 1-.754-1.213 1 1 0 0 0-1.783.907c.254.498.562.997.927 1.492a1 1 0 0 0 1.61-1.186zM23.404 24.825c.01-.403.069-.794.177-1.169a1 1 0 0 0-1.923-.551 6.71 6.71 0 0 0-.254 1.67 1 1 0 0 0 2 .05zM24.942 21.485c.257-.238.545-.458.86-.657a1 1 0 0 0-1.067-1.692 7.855 7.855 0 0 0-1.152.882 1 1 0 0 0 1.359 1.467zM28.661 19.76a11.338 11.338 0 0 1 1.598-.176 1.001 1.001 0 0 0-.085-1.999c-.66.028-1.286.099-1.877.208a1 1 0 0 0 .364 1.967zM33.873 19.701c.853.01 1.647-.02 2.384-.085a1 1 0 0 0-.177-1.992c-.675.059-1.402.087-2.184.077a1 1 0 0 0-.023 2zM39.544 19.003c.99-.303 1.826-.691 2.526-1.136a1 1 0 0 0-1.075-1.687 8.302 8.302 0 0 1-2.036.91 1 1 0 0 0 .585 1.913zM44.634 15.068a6.21 6.21 0 0 0 .607-3.003 1 1 0 0 0-1.998.093 4.215 4.215 0 0 1-.41 2.04 1.001 1.001 0 0 0 1.801.87zM43.997 8.529c-.729-.985-1.718-1.671-2.796-1.892a1.001 1.001 0 0 0-.402 1.96c.622.127 1.17.554 1.591 1.123a1 1 0 1 0 1.607-1.191z"
+                                        fill=""></path>
+                                </g>
+                                <path fill="url(#m)" d="M30.933 6.831c1.082-6.127 10.459-5.731 5 0z"
+                                    data-original="url(#m)"></path>
+                                <path fill="url(#n)" d="M30.933 8.383c1.082 6.126 10.459 5.731 5 0z"
+                                    data-original="url(#n)"></path>
+                                <path fill="url(#l)" d="M30.843 8.617h6.696a1 1 0 0 0 0-2h-6.696a1.001 1.001 0 0 0 0 2z"
+                                    data-original="url(#l)"></path>
+                            </g>
+                        </svg>
+                        <p class="text-center text-gray-500">Aucun sujet n'a été ouvert pour le moment. Vous pouvez
+                            être le premier à en ouvrir un. </p>
+
+
+                    </li>
+                </ul>
+                <!-- loading state -->
+                <ul role="list" class="space-y-4" *ngIf="isLoading == true">
+                    <li>
+
+                        <p class="text-center">
+                            <svg class="inline h-6 w-6 animate-spin mr-3" viewBox="3 3 18 18">
+                                <path class="fill-gray-200"
+                                    d="M12 5C8.13401 5 5 8.13401 5 12c0 3.866 3.13401 7 7 7 3.866.0 7-3.134 7-7 0-3.86599-3.134-7-7-7zM3 12c0-4.97056 4.02944-9 9-9 4.9706.0 9 4.02944 9 9 0 4.9706-4.0294 9-9 9-4.97056.0-9-4.0294-9-9z">
+                                </path>
+                                <path class="fill-gray-800"
+                                    d="M16.9497 7.05015c-2.7336-2.73367-7.16578-2.73367-9.89945.0-.39052.39052-1.02369.39052-1.41421.0-.39053-.39053-.39053-1.02369.0-1.41422 3.51472-3.51472 9.21316-3.51472 12.72796.0C18.7545 6.02646 18.7545 6.65962 18.364 7.05015c-.390599999999999.39052-1.0237.39052-1.4143.0z">
+                                </path>
+                            </svg>
+                            Chargement...
+                        </p>
+                    </li>
+                </ul>
+
             </div>
         </main>
 
@@ -82,8 +192,21 @@
                             </svg>Ouvrir un nouveau sujet</button>
                     </div>
 
-                    <a href="#"
-                        class="bg-gray-200 text-gray-900 group flex items-center px-3 py-2 text-sm font-medium rounded-md"
+                    <a (click)="filterByCategory(0)"
+                        class=" group flex items-center cursor-pointer px-3 py-2 text-sm font-medium rounded-md"
+                        [ngClass]="{'text-gray-600 hover\:bg-gray-50': currentCategoryId != 0, 'bg-gray-200 text-gray-900': currentCategoryId == 0}"
+                        aria-current="page">
+                        <svg class="text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <span class="truncate"> Tous les sujets</span>
+                    </a>
+
+                    <a (click)="filterByCategory(1)"
+                        class=" group flex items-center cursor-pointer px-3 py-2 text-sm font-medium rounded-md"
+                        [ngClass]="{'text-gray-600 hover\:bg-gray-50': currentCategoryId != 1, 'bg-gray-200 text-gray-900': currentCategoryId == 1}"
                         aria-current="page">
                         <!-- Heroicon name: outline/home -->
                         <svg class="text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg"
@@ -94,33 +217,90 @@
                         <span class="truncate"> Discussion générale </span>
                     </a>
 
-                    <a href="#"
-                        class="text-gray-600 hover:bg-gray-50 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
-                        <!-- Heroicon name: outline/fire -->
-                        <svg class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+                    <a (click)="filterByCategory(2)"
+                        class=" group flex items-center cursor-pointer px-3 py-2 text-sm font-medium rounded-md" 
+                        [ngClass]="{'text-gray-600 hover\:bg-gray-50': currentCategoryId != 2, 'bg-gray-200 text-gray-900': currentCategoryId == 2}">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
                         </svg>
-                        <span class="truncate"> Support technique </span>
+                        <span class="truncate"> Développement de carrière </span>
                     </a>
 
 
 
-                    <a href="#"
-                        class="text-gray-600 hover:bg-gray-50 group flex items-center px-3 py-2 text-sm font-medium rounded-md">
-                        <!-- Heroicon name: outline/trending-up -->
-                        <svg class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    <a (click)="filterByCategory(3)"
+                    class=" group flex items-center cursor-pointer px-3 py-2 text-sm font-medium rounded-md" 
+                    [ngClass]="{'text-gray-600 hover\:bg-gray-50': currentCategoryId != 3, 'bg-gray-200 text-gray-900': currentCategoryId == 3}">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                         </svg>
-                        <span class="truncate"> Échange de bonnes pratiques </span>
+
+
+                        <span class="truncate"> Bien-être et santé </span>
                     </a>
+
+
+                    <a (click)="filterByCategory(4)"
+                    class=" group flex items-center cursor-pointer px-3 py-2 text-sm font-medium rounded-md" 
+                    [ngClass]="{'text-gray-600 hover\:bg-gray-50': currentCategoryId != 4, 'bg-gray-200 text-gray-900': currentCategoryId == 4}">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122" />
+                        </svg>
+
+
+                        <span class="truncate"> Diversité </span>
+                    </a>
+
+                    <a (click)="filterByCategory(5)"
+                    class=" group flex items-center cursor-pointer px-3 py-2 text-sm font-medium rounded-md" 
+                    [ngClass]="{'text-gray-600 hover\:bg-gray-50': currentCategoryId != 5, 'bg-gray-200 text-gray-900': currentCategoryId == 5}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                        </svg>
+
+                        <span class="truncate"> Projets en cours </span>
+                    </a>
+
+                    <a (click)="filterByCategory(6)"
+                    class=" group flex items-center cursor-pointer px-3 py-2 text-sm font-medium rounded-md" 
+                    [ngClass]="{'text-gray-600 hover\:bg-gray-50': currentCategoryId != 6, 'bg-gray-200 text-gray-900': currentCategoryId == 6}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 3.75H6.912a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3" />
+                        </svg>
+
+                        <span class="truncate"> Suggestions et feedback </span>
+                    </a>
+
+
+
+                    <a (click)="filterByCategory(7)"
+                    class=" group flex items-center cursor-pointer px-3 py-2 text-sm font-medium rounded-md" 
+                    [ngClass]="{'text-gray-600 hover\:bg-gray-50': currentCategoryId != 7, 'bg-gray-200 text-gray-900': currentCategoryId == 7}">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+                        </svg>
+
+                        <span class="truncate"> Espace détente </span>
+                    </a>
+
+
+
+
                 </div>
 
             </nav>
@@ -134,8 +314,7 @@
 
 
 <!-- Create new post modal -->
-<p-dialog header="Créer un nouveau sujet" [(visible)]="displayNewPostForm" [responsive]="true" [modal]="true"
-    [style]="{width: '80vw'}">
+<p-dialog header="Créer un nouveau sujet" [(visible)]="displayNewPostForm" [modal]="true" [style]="{width: '80vw'}">
 
     <div>
 
@@ -145,12 +324,35 @@
                 <div class="mb-3">
                     <label for="title" class="block text-sm font-medium text-gray-700">Catégorie</label>
                     <div class="mt-1">
-                        <select formControlName="category"
+                        <p-dropdown styleClass="p-inputtext-sm w-full" [options]="categories" formControlName="category"
+                            optionLabel="name" [showClear]="true" placeholder="Sélectionner une catégorie"
+                            [style]="{width: '100%'}">
+                            <ng-template pTemplate="selectedItem">
+                                <div *ngIf="newPost.value.category">
+                                    <div>{{newPost.value.category.name}}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-category pTemplate="item">
+                                <div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">{{category.name}}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">{{category.description}}</p>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <!-- <select formControlName="category"
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            <option value="1">Général</option>
-                            <option value="2">Catégorie 2</option>
-                            <option value="3">Catégorie 3</option>
-                        </select>
+                            <option value="Discussion générale">Discussion générale</option>
+                            <option value="Développement de carrière">Développement de carrière</option>
+                            <option value="Bien-être et santé">Bien-être et santé</option>
+                            <option value="Diversité">Diversité</option>
+                            <option value="Projets en cours">Projets en cours</option>
+                            <option value="Suggestions et feedback">Suggestions et feedback</option>
+                            <option value="Espace détente">Espace détente</option>
+                        </select> -->
                     </div>
                 </div>
 
@@ -167,9 +369,10 @@
                     <label for="content" class="block text-sm font-medium text-gray-700">Ecrire votre sujet /
                         Question</label>
                     <div class="mt-1">
-                        <textarea rows="10" name="content" id="content" formControlName="content"
+                        <p-editor formControlName="content" [style]="{height: '320px'}"></p-editor>
+                        <!-- <textarea rows="10" name="content" id="content" formControlName="content"
                             placeholder="Ecrire votre sujet / Question"
-                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea> -->
                     </div>
                 </div>
 

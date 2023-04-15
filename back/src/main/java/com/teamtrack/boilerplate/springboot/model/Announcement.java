@@ -23,10 +23,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Announcement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String title;
+
+    // use LONGTEXT for MySQL to store large text
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
-    private LocalDate created_at;
 
     @CreatedDate
 	@Column(nullable = false, updatable = false)

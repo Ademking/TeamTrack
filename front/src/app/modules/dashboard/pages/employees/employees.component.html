@@ -54,7 +54,7 @@
                     </button>
                 </span>
 
-                <span class=" sm:block" *hasRole="['ROLE_ADMIN']" >
+                <span class=" sm:block" *hasRole="['ROLE_ADMIN']">
                     <button type="button" (click)="displayAddNewEmployeeDialog = true"
                         class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <!-- Heroicon name: solid/plus -->
@@ -119,8 +119,8 @@
                         <div class="flex items-center space-x-5">
                             <div class="flex-shrink-0">
                                 <div class="relative">
-                                    <span
-                                        class="inline-flex items-center justify-center h-16 w-16 rounded-full" [ngClass]="generateRandomColor(selectedUser?.lastname.charAt(0))">
+                                    <span class="inline-flex items-center justify-center h-16 w-16 rounded-full"
+                                        [ngClass]="generateRandomColor(selectedUser?.lastname.charAt(0))">
                                         <span class="text-xl font-medium leading-none text-white">{{
                                             selectedUser?.firstname.charAt(0) }}{{ selectedUser?.lastname.charAt(0)
                                             }}</span>
@@ -133,14 +133,30 @@
                             <div>
                                 <h1 class="text-2xl font-bold text-gray-900">{{selectedUser?.firstname}}
                                     {{selectedUser?.lastname}}</h1>
-                                <p class="text-sm font-medium text-gray-500">{{ selectedUser?.job }}</p>
+                                <p class="text-sm font-medium text-gray-500">
+
+
+
+                                    <span *ngIf="selectedUser.team"
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mr-3">
+                                        <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor"
+                                            viewBox="0 0 8 8">
+                                            <circle cx="4" cy="4" r="3" />
+                                        </svg>
+                                        {{ selectedUser?.team.name }}
+                                    </span>
+
+                                    {{ selectedUser?.job | titlecase }}
+                                </p>
+
+
                             </div>
                         </div>
                         <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle">
                         </p-confirmDialog>
                         <div
                             class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
-                            <button type="button" *hasRole="['ROLE_ADMIN']"
+                            <button type="button" *hasRole="['ROLE_ADMIN']" (click)="openEditUserDialog(selectedUser)"
                                 class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">Modifier</button>
                             <button type="button" *hasRole="['ROLE_ADMIN']" (click)="deleteUser(selectedUser.id)"
                                 class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">Supprimer
@@ -174,7 +190,13 @@
                                             </div>
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm font-medium text-gray-500">Genre</dt>
-                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.gender }}</dd>
+                                                <dd *ngIf=" selectedUser?.gender == 'm'"
+                                                    class="mt-1 text-sm text-gray-900">
+                                                    Homme</dd>
+
+                                                <dd *ngIf="selectedUser?.gender == 'f'"
+                                                    class="mt-1 text-sm text-gray-900">
+                                                    Femme</dd>
                                             </div>
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm font-medium text-gray-500">Adresse email</dt>
@@ -186,17 +208,40 @@
                                             </div>
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm font-medium text-gray-500">Poste</dt>
-                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.job }}
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.job | titlecase
+                                                    }}
                                             </div>
                                             <div class="sm:col-span-1">
-                                                <dt class="text-sm font-medium text-gray-500">Code</dt>
-                                                <dd class="mt-1 text-sm text-gray-900">#12345
+                                                <dt class="text-sm font-medium text-gray-500">Code Employé</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.employeeCode }}
                                             </div>
-                                            <div class="sm:col-span-2">
+                                            <div class="sm:col-span-1">
                                                 <dt class="text-sm font-medium text-gray-500">Adresse</dt>
                                                 <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.address }}
                                             </div>
-                                           
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Date de naissance</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.birthdate |
+                                                    date:'fullDate' | titlecase}}</dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Date de recrutement</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.joinDate |
+                                                    date:'fullDate' | titlecase}}</dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Créé le</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.dateCreated |
+                                                    date:'fullDate' | titlecase}} {{ selectedUser?.dateCreated |
+                                                    date:'shortTime' | titlecase}}</dd>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <dt class="text-sm font-medium text-gray-500">Dernière mise à jour</dt>
+                                                <dd class="mt-1 text-sm text-gray-900">{{ selectedUser?.lastUpdated |
+                                                    date:'fullDate' | titlecase }} {{ selectedUser?.lastUpdated |
+                                                    date:'shortTime' | titlecase}}</dd>
+                                            </div>
+
                                         </dl>
                                     </div>
 
@@ -299,7 +344,22 @@
                     <nav class="flex-1 min-h-0 overflow-y-auto" aria-label="Directory">
 
                         <!-- Loading -->
-                        <p *ngIf="isLoading" class="text-center text-gray-500 text-sm">Chargement en cours...</p>
+                        <p *ngIf="isLoading" class="text-center text-gray-500 text-sm">
+
+
+                            <svg class="inline h-6 w-6 animate-spin mr-3" viewBox="3 3 18 18">
+                                <path class="fill-gray-200"
+                                    d="M12 5C8.13401 5 5 8.13401 5 12c0 3.866 3.13401 7 7 7 3.866.0 7-3.134 7-7 0-3.86599-3.134-7-7-7zM3 12c0-4.97056 4.02944-9 9-9 4.9706.0 9 4.02944 9 9 0 4.9706-4.0294 9-9 9-4.97056.0-9-4.0294-9-9z">
+                                </path>
+                                <path class="fill-gray-800"
+                                    d="M16.9497 7.05015c-2.7336-2.73367-7.16578-2.73367-9.89945.0-.39052.39052-1.02369.39052-1.41421.0-.39053-.39053-.39053-1.02369.0-1.41422 3.51472-3.51472 9.21316-3.51472 12.72796.0C18.7545 6.02646 18.7545 6.65962 18.364 7.05015c-.390599999999999.39052-1.0237.39052-1.4143.0z">
+                                </path>
+                            </svg>
+                            Chargement...
+
+
+
+                        </p>
 
                         <!-- No results -->
                         <div *ngIf="!isLoading && !(filtredGroupedUsers | keyvalue)?.length">
@@ -368,8 +428,8 @@
 
 
 <!-- add employee -->
-<p-dialog header="Ajouter un employé" [(visible)]="displayAddNewEmployeeDialog" [responsive]="true" [modal]="true"
-    [style]="{width: '70vw'}" [draggable]="false" #addModal>
+<p-dialog header="Ajouter un employé" [(visible)]="displayAddNewEmployeeDialog" [modal]="true" [style]="{width: '70vw'}"
+    [draggable]="false" #addModal>
 
     <div>
         <div class="">
@@ -419,8 +479,8 @@
                         <div class="col-span-4 sm:col-span-1">
                             <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date de naissance
                             </label>
-                            <p-calendar formControlName="date_of_birth" styleClass="p-inputtext-sm w-full" [maxDate]="maxDate"
-                                appendTo="body"></p-calendar>
+                            <p-calendar formControlName="date_of_birth" styleClass="p-inputtext-sm w-full"
+                                [maxDate]="maxDate" appendTo="body"></p-calendar>
                         </div>
 
                         <div class="col-span-4 sm:col-span-2">
@@ -469,15 +529,16 @@
                             <label for="code" class="block text-sm font-medium text-gray-700">Equipe
                             </label>
                             <p-dropdown [options]="teams" formControlName="team" placeholder="Sélectionner une équipe"
-                                appendTo="body" optionLabel="name" optionValue="id" styleClass="p-inputtext-sm w-full">
+                                [showClear]="true" appendTo="body" optionLabel="name" optionValue="id"
+                                styleClass="p-inputtext-sm w-full">
                             </p-dropdown>
                         </div>
 
                         <div class="col-span-4 sm:col-span-1">
                             <label for="date_of_hiring" class="block text-sm font-medium text-gray-700">Date d'embauche
                             </label>
-                            <p-calendar formControlName="date_of_hiring" styleClass="p-inputtext-sm w-full" [maxDate]="maxDate"
-                                appendTo="body"></p-calendar>
+                            <p-calendar formControlName="date_of_hiring" styleClass="p-inputtext-sm w-full"
+                                [maxDate]="maxDate" appendTo="body"></p-calendar>
                         </div>
 
                     </div>
@@ -490,6 +551,139 @@
             class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             [ngClass]="{ 'opacity-50 cursor-not-allowed': newEmployee.invalid }"
             [disabled]="newEmployee.invalid">Ajouter</button>
+
+    </ng-template>
+
+</p-dialog>
+
+
+
+
+<!-- modify employee -->
+<p-dialog header="Ajouter un employé" [(visible)]="displayEditnewEmployeeDialog" [modal]="true"
+    [style]="{width: '70vw'}" [draggable]="false" #editModal>
+
+    <div>
+        <div class="">
+            <form [formGroup]="editEmployee">
+                <div class="bg-white px-4 sm:p-6">
+
+                    <div class="grid grid-cols-4 gap-6">
+
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Prénom</label>
+                            <input pInputText type="text" name="first-name" id="first-name" autocomplete="cc-given-name"
+                                formControlName="firstname"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="last-name" class="block text-sm font-medium text-gray-700">Nom</label>
+                            <input pInputText type="text" name="last-name" id="last-name" autocomplete="cc-family-name"
+                                formControlName="lastname"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-3 sm:col-span-1">
+                            <label for="gender" class="block text-sm font-medium text-gray-700">Sexe</label>
+                            <p-selectButton [options]="genders" formControlName="gender" optionLabel="name"
+                                styleClass="p-inputtext-sm w-full">
+                            </p-selectButton>
+                        </div>
+
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="email-address" class="block text-sm font-medium text-gray-700">Email
+                                address</label>
+                            <input pInputText type="text" name="email-address" id="email-address" autocomplete="email"
+                                formControlName="email"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Téléphone</label>
+
+                            <input pInputText type="tel" name="phone" id="phone" autocomplete="phone"
+                                formControlName="phone"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date de naissance
+                            </label>
+                            <p-calendar formControlName="date_of_birth" styleClass="p-inputtext-sm w-full"
+                                [maxDate]="maxDate" appendTo="body"></p-calendar>
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="address" class="block text-sm font-medium text-gray-700">Adresse</label>
+
+                            <input pInputText type="text" name="address" id="address" autocomplete="address"
+                                formControlName="address"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="job" class="block text-sm font-medium text-gray-700">Poste
+                            </label>
+                            <input pInputText type="text" name="job" id="job" autocomplete="job" formControlName="job"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <!-- <div class="col-span-4 sm:col-span-2">
+                            <label for="password" class="block text-sm font-medium text-gray-700">Nouveau mot de
+                                passe</label>
+
+                            <input type="password" pPassword name="password" [feedback]="false"
+                                formControlName="password"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="password" class="block text-sm font-medium text-gray-700">Confirmer le mot de
+                                passe</label>
+
+                            <input type="password" pPassword name="password_confirmation" [feedback]="false"
+                                formControlName="password_confirmation"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div> -->
+
+
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="code" class="block text-sm font-medium text-gray-700">Code Employé
+                            </label>
+                            <input pInputText type="text" name="code" id="code" autocomplete="code"
+                                formControlName="code"
+                                class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-2">
+                            <label for="code" class="block text-sm font-medium text-gray-700">Equipe
+                            </label>
+                            <p-dropdown [options]="teams" formControlName="team" placeholder="Sélectionner une équipe"
+                                [showClear]="true" appendTo="body" optionLabel="name" optionValue="id"
+                                styleClass="p-inputtext-sm w-full">
+                            </p-dropdown>
+                        </div>
+
+                        <div class="col-span-4 sm:col-span-1">
+                            <label for="date_of_hiring" class="block text-sm font-medium text-gray-700">Date d'embauche
+                            </label>
+                            <p-calendar formControlName="date_of_hiring" styleClass="p-inputtext-sm w-full"
+                                [maxDate]="maxDate" appendTo="body"></p-calendar>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" (click)="submitEditEmployee()"
+            class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            [ngClass]="{ 'opacity-50 cursor-not-allowed': editEmployee.invalid }"
+            [disabled]="editEmployee.invalid">Modifier</button>
 
     </ng-template>
 
