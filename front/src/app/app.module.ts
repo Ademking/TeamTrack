@@ -35,6 +35,7 @@ import localeFr from '@angular/common/locales/fr';
     CoreModule,
     FormsModule,
     AgGridModule,
+  
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' }

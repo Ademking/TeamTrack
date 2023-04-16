@@ -27,7 +27,7 @@ const routes: Routes = [
           RoleGuard,
         ],
         data: {
-          roles: ['ROLE_EMPLOYEE'],
+          roles: ['ROLE_EMPLOYEE', 'ROLE_ADMIN'],
         },
       },
       {

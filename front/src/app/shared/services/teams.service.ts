@@ -14,6 +14,10 @@ export class TeamsService {
         return this.httpClient.post(environment.API_URL + '/api/v1/teams/add', team);
     }
 
+    public updateTeam(id: any, team: any) {
+        return this.httpClient.put(environment.API_URL + '/api/v1/teams/' + id, team);
+    }
+
     public deleteTeam(teamId: string) {
         return this.httpClient.delete(environment.API_URL + '/api/v1/teams/delete/' + teamId);
     }

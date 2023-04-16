@@ -29,7 +29,8 @@
 
     <div class="bg-white shadow overflow-hidden sm:rounded-md" *ngIf="teams.length > 0">
 
-
+        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" appendTo="body" >
+        </p-confirmDialog>
 
 
         <ul role="list" class="divide-y divide-gray-200">
@@ -76,9 +77,8 @@
                                             d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                     </svg>
                                 </button>
-                                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle">
-                                </p-confirmDialog>
-                                <button (click)="deleteTeam($event, team.id)" type="button" pTooltip="Supprimer"
+                               
+                                <button (click)="deleteTeam(team.id)" type="button" pTooltip="Supprimer"
                                     tooltipPosition="bottom" appendTo="body" *hasRole="['ROLE_ADMIN']"
                                     class="-ml-px relative inline-flex items-center px-2 py-1 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -163,9 +163,54 @@
 
 
 <!-- modif equipe -->
-<p-dialog header="Ajouter nouvelle équipe" [(visible)]="displayEditTeamDialog" [modal]="true" [style]="{width: '50vw'}"
+<p-dialog header="Modifier équipe" [(visible)]="displayEditTeamDialog" [modal]="true" [style]="{width: '50vw'}"
     [draggable]="true" appendTo="body">
-    <p>TODO: Modifier une équipe</p>
+    <div>
+        <form [formGroup]="editTeamForm">
+            <div class="bg-white px-4 sm:py-2">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="col-span-4 sm:col-span-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nom de l'équipe</label>
+                        <input pInputText type="text" name="name" id="name" autocomplete="cc-given-name"
+                            formControlName="name"
+                            class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white px-4 sm:py-2">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="col-span-4 sm:col-span-4">
+                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                        <input pInputText type="text" name="description" id="description" autocomplete="cc-given-name"
+                            formControlName="description"
+                            class="p-inputtext-sm mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white px-4 sm:py-2">
+                <div class="grid grid-cols-4 gap-6">
+                    <div class="col-span-4 sm:col-span-4">
+                        <label for="members" class="block text-sm font-medium text-gray-700">Liste des
+                            membres</label>
+                        <p-multiSelect [options]="allUsers" formControlName="members" optionLabel="fullname"
+                            selectedItemsLabel="{0} membres sélectionnés" optionValue="id"
+                            defaultLabel="Sélectionner les membres" appendTo="body" [style]="{width: '100%'}"
+                            [filter]="true"></p-multiSelect>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <ng-template pTemplate="footer">
+        <button type="button" (click)="submitEditTeam()"
+            class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            [ngClass]="{ 'opacity-50 cursor-not-allowed': editTeamForm.invalid }"
+            [disabled]="editTeamForm.invalid">Ajouter</button>
+
+    </ng-template>
 </p-dialog>
 
 <!-- team members -->

@@ -34,10 +34,36 @@ public class TeamsService {
         return teamsRepository.save(team);
     }
 
-    public Team updateTeam(Long id, Team team) {
+    public Team updateTeam(Long id, Team team, List<Long> employeeIds) {
         Team teamToUpdate = teamsRepository.findById(id).get();
         teamToUpdate.setName(team.getName());
-        return teamsRepository.save(teamToUpdate);
+        teamToUpdate.setDescription(team.getDescription());
+
+        // get employees by team id
+        List<User> employeesOfTeam = employeesRepository.findByTeamId(id).orElse(null);
+        // for each employee, set team to null
+        employeesOfTeam.forEach(employee -> {
+            employee.setTeam(null);
+        });
+        // save employees
+        employeesRepository.saveAll(employeesOfTeam);
+        teamsRepository.save(teamToUpdate);
+
+
+        List<User> newEmployees = employeesRepository.findAllById(employeeIds);
+        newEmployees.forEach(employee -> {
+            employee.setTeam(teamToUpdate);
+        });
+        if (newEmployees.size() > 0) {
+            employeesRepository.saveAll(newEmployees);
+        }
+        employeesRepository.saveAll(newEmployees);
+        teamsRepository.save(teamToUpdate);
+        return teamToUpdate;
+
+
+
+        
     }
 
     public void deleteTeam(Long id) {

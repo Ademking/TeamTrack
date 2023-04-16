@@ -21,4 +21,16 @@ export class UsersService {
     public updateUser(userId: string, user: any) {
         return this.httpClient.put(environment.API_URL + '/api/v1/employees/update/' + userId, user);
     }
+
+    public updateMyProfile(user: any) {
+        return this.httpClient.put(environment.API_URL + '/api/v1/employees/update-my-profile', user);
+    }
+
+    public changePassword(req: any) {
+        return this.httpClient.post(environment.API_URL + '/api/v1/employees/change-password', req);
+    }
+
+    public resetPassword(email: string) {
+        return this.httpClient.get(environment.API_URL + `/login/forgot-password/${email}`)
+    }
 }

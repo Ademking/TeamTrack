@@ -35,7 +35,7 @@ export class AuthService {
         }))
 
         if (res.user.userRole == 'ROLE_EMPLOYEE') {
-          this.msg.success("Bienvenue " + res.user.firstname);
+          this.msg.success("Connexion réussie. Bienvenue " + res.user.firstname);
           this.router.navigate(['/dashboard/'])
         }
         else if (res.user.userRole == 'ROLE_ADMIN') {
@@ -64,11 +64,8 @@ export class AuthService {
   }
 
   logout() {
-    if (localStorage.removeItem('access_token') == null
-      && localStorage.removeItem('user') == null
-    ) {
-      this.router.navigate(['/auth/login']);
-    }
+    localStorage.clear();
+    this.router.navigate(['/auth/login']);
   }
 
   userRole() {

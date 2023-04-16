@@ -3,11 +3,22 @@ spring:
     url: jdbc:mysql://localhost:3306/teamtrack?useSSL=false&serverTimezone=UTC
     username: root
     password: 
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: 778a12c0346b2b
+    password: 87f97562447a9f
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: false
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       show-sql: true
       format-sql: true
       type: info
@@ -53,4 +64,4 @@ swagger:
   app-license: Apache 2.0
 
 ## Faker configuration
-run-faker: true
+run-faker: false

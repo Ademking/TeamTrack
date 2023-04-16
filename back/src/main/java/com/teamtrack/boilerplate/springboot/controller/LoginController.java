@@ -5,12 +5,11 @@ import com.teamtrack.boilerplate.springboot.security.dto.LoginResponse;
 import com.teamtrack.boilerplate.springboot.security.jwt.JwtTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.Map;
 
+import javax.validation.Valid;
 
 @CrossOrigin
 @RestController
@@ -24,6 +23,11 @@ public class LoginController {
 	public ResponseEntity<LoginResponse> loginRequest(@Valid @RequestBody LoginRequest loginRequest) {
 		final LoginResponse loginResponse = jwtTokenService.getLoginResponse(loginRequest);
 		return ResponseEntity.ok(loginResponse);
+	}
+
+	@GetMapping("/forgot-password/{email}")
+	public ResponseEntity<?> forgotPassword(@PathVariable String email) {
+		return ResponseEntity.ok().body(Map.of("message", "Email sent"));
 	}
 
 

@@ -26,11 +26,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EditorModule } from 'primeng/editor';
 
 
+
 import { ConfirmationService } from 'primeng/api';
 
 import { TemplateRendererComponent } from './components/template-renderer.component';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { FromNowPipe } from './pipes/from-now.pipe';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 const DIRECTIVES = [
   HasRoleDirective
@@ -74,6 +76,9 @@ const MODULES = [
   MultiSelectModule,
   EditorModule,
   ListboxModule,
+  NgxEchartsModule.forRoot({
+    echarts: () => import('echarts'),
+  }),
   HotToastModule.forRoot(
     {
       position: 'top-right',

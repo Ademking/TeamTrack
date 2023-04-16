@@ -50,6 +50,11 @@ export class TeamsComponent implements OnInit {
 
     showEditTeamDialog(team: any) {
         this.selectedTeam = team;
+        this.editTeamForm.patchValue({
+            name: team.name,
+            description: team.description,
+            members: team.users.map((user: any) => user.id)
+        });
         this.displayEditTeamDialog = true;
     }
 
@@ -64,6 +69,14 @@ export class TeamsComponent implements OnInit {
         description: new FormControl(null, Validators.required),
         members: new FormControl(null, Validators.required)
     });
+
+    editTeamForm = new FormGroup({
+        name: new FormControl(null, Validators.required),
+        description: new FormControl(null, Validators.required),
+        members: new FormControl(null, Validators.required)
+    });
+
+
 
     // generate a random color for the user avatar background based on the first letter of his first name
     // use tailwindcss background color classes
@@ -104,10 +117,31 @@ export class TeamsComponent implements OnInit {
         }
     }
 
-    deleteTeam(ev: any, teamId: any) {
+    submitEditTeam() {
+        if (this.editTeamForm.valid) {
+            let req = {
+                team: {
+                    name: this.editTeamForm.value.name,
+                    description: this.editTeamForm.value.description
+                },
+                employeesIds: this.editTeamForm.value.members
+            };
+
+            this.teamsService.updateTeam(this.selectedTeam.id, req).subscribe((team: any) => {
+                this.msg.success('Votre équipe a été modifiée avec succès');
+                this.displayEditTeamDialog = false;
+                this.teamsService.getAllTeams().subscribe((teams: any) => {
+                    // reverse the array to display the latest added team at the top
+                    this.teams = teams.reverse();
+                });
+            });
+        }
+    }
+
+    deleteTeam(teamId: any) {
 
         this.confirmationService.confirm({
-          
+
             message: 'Êtes-vous sûr de vouloir supprimer cette équipe ?',
             acceptLabel: 'Oui',
             rejectLabel: 'Non',

@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ColDef, GridOptions, GridReadyEvent } from 'ag-grid-community';
+import localeText from 'src/app/core/ag-grid-i18n';
 import { TemplateRendererComponent } from 'src/app/shared/components/template-renderer.component';
 import { AnnoncesService } from 'src/app/shared/services/annonces.service';
 import { LeaveService } from 'src/app/shared/services/leave.service';
@@ -56,6 +57,7 @@ export class MesDemandesCongeComponent implements OnInit {
     columnDefs: this.columnDefs,
     rowHeight: 60,
     pagination: true,
+    localeText: localeText,
     onGridReady: (params: GridReadyEvent) => {
       //params.api.sizeColumnsToFit();
     },

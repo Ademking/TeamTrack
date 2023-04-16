@@ -30,4 +30,7 @@ public interface UserService {
 
 	User getUserById(Long userId);
 
+	Boolean checkIfValidOldPassword(User user, String oldPassword);
+
+	User changeUserPassword(User user, String password);
 }

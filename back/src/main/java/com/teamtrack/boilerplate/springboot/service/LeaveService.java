@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.teamtrack.boilerplate.springboot.model.Leave;
+import com.teamtrack.boilerplate.springboot.model.LeaveStatus;
 import com.teamtrack.boilerplate.springboot.repository.LeaveRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,16 @@ public class LeaveService {
 
     public List<Leave> getAllLeaves() {
         return leaveRepository.findAll();
+    }
+
+    public Leave getLeaveById(Long id) {
+        return leaveRepository.findById(id).get();
+    }
+
+    public Leave changeLeaveStatus(Long id, LeaveStatus status) {
+        Leave leave = leaveRepository.findById(id).get();
+        leave.setLeaveStatus(status);
+        return leaveRepository.save(leave);
     }
 
     public Leave addLeave(Leave leave) {

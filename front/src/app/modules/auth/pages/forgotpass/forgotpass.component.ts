@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HotToastService } from '@ngneat/hot-toast';
+import { UsersService } from 'src/app/shared/services/users.service';
 
 @Component({
   selector: 'app-forgotpass',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotpassComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UsersService, private msg: HotToastService) { }
 
   ngOnInit(): void {
+  }
+
+  email!: string;
+
+  submit() {
+    this.userService.resetPassword(this.email).subscribe(
+      (res: any) => {
+        this.msg.success("Votre demande a été prise en compte. Veuillez consulter votre boîte mail pour réinitialiser votre mot de passe.");
+      });
   }
 
 }

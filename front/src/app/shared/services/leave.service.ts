@@ -4,6 +4,9 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class LeaveService {
+    updateLeaveStatus(id: any, status: { leaveStatus: any; }) {
+        return this.httpClient.put(environment.API_URL + '/api/v1/leaves/change-status/' + id, status);
+    }
     constructor(private httpClient: HttpClient) { }
 
     public postLeaveDemand(leave: any) {
@@ -14,4 +17,7 @@ export class LeaveService {
         return this.httpClient.get(environment.API_URL + '/api/v1/leaves/my-demands');
     }
 
+    public getAllLeaves() {
+        return this.httpClient.get(environment.API_URL + '/api/v1/leaves/all');
+    }
 }

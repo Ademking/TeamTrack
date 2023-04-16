@@ -1,66 +1,229 @@
-<header class="bg-gray-50 py-8">
-    <div class="mx-auto px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
-        <div class="flex-1 min-w-0">
-            <nav class="flex" aria-label="Breadcrumb">
-                <ol role="list" class="flex items-center space-x-4">
-                    <li>
-                        <div>
-                            <a href="#" class="text-sm font-medium text-gray-500 hover:text-gray-700">Accueil</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <!-- Heroicon name: solid/chevron-right -->
-                            <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Congés</a>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
-            <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Congés</h1>
-            <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-8">
-                <div class="mt-2 flex items-center text-sm text-gray-500">
-                    <!-- Heroicon name: solid/briefcase -->
-                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                            clip-rule="evenodd" />
-                        <path
-                            d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-                    </svg>
-                    Congés
+<div class="">
+    <header class="bg-gray-50 py-8">
+        <div class=" mx-auto px-4 sm:px-6 lg:px-8 xl:flex xl:items-center xl:justify-between">
+            <div class="flex-1 min-w-0">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol role="list" class="flex items-center space-x-4">
+                        <li>
+                            <div>
+                                <a [routerLink]="['/dashboard']"
+                                    class="text-sm font-medium text-gray-500 hover:text-gray-700">Accueil</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <!-- Heroicon name: solid/chevron-right -->
+                                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <a 
+                                    class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Congés</a>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="mt-2 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Congés</h1>
+                <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-8">
+                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                        <!-- Heroicon name: solid/briefcase -->
+                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                                clip-rule="evenodd" />
+                            <path
+                                d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                        </svg>
+                        Liste des congés
+                    </div>
+
                 </div>
+            </div>
+            <div class="mt-5 flex xl:mt-0 xl:ml-4">
+
+                <span class=" sm:block">
+
+
+
+                </span>
+
 
             </div>
         </div>
-        <div class="mt-5 flex xl:mt-0 xl:ml-4">
+    </header>
 
-            <span class=" sm:block">
-                <button type="button"
-                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    <!-- Heroicon name: solid/plus -->
-                    <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                        fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Créér une demande de congé
-                </button>
-            </span>
+    <main class="py-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
+            <div class="px-4 sm:px-0">
+                <div class="table-height">
 
 
+                    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle">
+                    </p-confirmDialog>
+
+                    <ag-grid-angular style="width: 100%; height: 70vh;" class="ag-theme-alpine"
+                        [gridOptions]="gridOptions">
+                    </ag-grid-angular>
 
 
+                    <ng-template #statusElem let-row>
+                        <span *ngIf="row.leaveStatus == 'PENDING'"
+                            class="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800"> En cours de
+                            traitement </span>
+                        <span *ngIf="row.leaveStatus == 'ACCEPTED'"
+                            class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800"> Demande
+                            acceptée </span>
+                        <span *ngIf="row.leaveStatus == 'REJECTED'"
+                            class="rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-800"> Demande rejetée
+                        </span>
+                    </ng-template>
+
+
+                    <ng-template #actions let-row>
+                        <span class="relative z-0 inline-flex shadow-sm rounded-md">
+                            <button type="button" pTooltip="Détails" tooltipPosition="bottom" appendTo="body"
+                                (click)="openDetails(row)"
+                                class="relative inline-flex items-center px-2 py-1 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"><svg
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </button>
+                            <button type="button" pTooltip="Changer le statut" tooltipPosition="bottom" appendTo="body"
+                                (click)="changeStatus(row)"
+                                class="-ml-px relative inline-flex items-center px-2 py-1 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                </svg>
+                            </button>
+
+
+
+                            <button (click)="deleteConge(row.id)" type="button" pTooltip="Supprimer"
+                                tooltipPosition="bottom" appendTo="body"
+                                class="-ml-px relative inline-flex items-center px-2 py-1 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-red-500">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                </svg>
+                            </button>
+                        </span>
+                    </ng-template>
+                </div>
+
+            </div>
 
         </div>
+    </main>
+</div>
+
+
+
+<!-- details modal -->
+<p-dialog header="Détails" [(visible)]="displayDetailsModal" [modal]="true" [style]="{width: '70vw'}"
+    [draggable]="false" #addModal>
+
+
+    <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+        <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">
+                Statut
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                <span *ngIf="selectedLeave?.leaveStatus == 'PENDING'"
+                    class="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800"> En cours de
+                    traitement </span>
+                <span *ngIf="selectedLeave?.leaveStatus == 'ACCEPTED'"
+                    class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800"> Demande acceptée
+                </span>
+                <span *ngIf="selectedLeave?.leaveStatus == 'REJECTED'"
+                    class="rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-800"> Demande rejetée </span>
+            </dd>
+        </div>
+
+        <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">
+                Type de congé
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                {{getLeaveType(selectedLeave?.type)}}
+            </dd>
+        </div>
+
+        <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">
+                Date de début / Date de fin
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                {{selectedLeave?.startDate | date: 'dd/MM/yyyy'}} - {{selectedLeave?.endDate | date: 'dd/MM/yyyy'}}
+                ({{getDuration(selectedLeave?.startDate, selectedLeave?.endDate)}} jours)
+            </dd>
+        </div>
+
+        <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">
+                Raison
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                {{selectedLeave?.reason}}
+            </dd>
+        </div>
+
+        <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">
+                Commentaire
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                {{selectedLeave?.comment}}
+            </dd>
+        </div>
+
+        <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">
+                Date de création
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                {{selectedLeave?.dateCreated | date: 'dd/MM/yyyy'}} ({{selectedLeave?.dateCreated | fromNow }})
+            </dd>
+        </div>
+
+        <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">
+                Date de modification
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900">
+                {{selectedLeave?.lastUpdated | date: 'dd/MM/yyyy'}} ({{selectedLeave?.lastUpdated | fromNow }})
+            </dd>
+        </div>
+
+
+
+
+
+    </dl>
+</p-dialog>
+
+
+<!-- change status modal -->
+<p-dialog header="Changer le status" [(visible)]="displayStatusModal" [modal]="true" [style]="{width: '70vw'}"
+    [draggable]="false" #addModal>
+
+    <div class="flex flex-col justify-center items-center">
+        <p class="text-gray-700 text-lg font-medium py-3">Changer le statut de la demande de congé</p>
+
+        <p-selectButton (onOptionClick)="submitChangeStatus($event)" [options]="statusOptions" [(ngModel)]="selectedLeaveStatus" optionLabel="label"
+            optionValue="value"></p-selectButton>
+
     </div>
-</header>
+</p-dialog>
 
 <app-footer></app-footer>

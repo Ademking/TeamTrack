@@ -1,285 +1,341 @@
-<div class="mx-auto sm:px-6 py-6">
-    <!-- Main 2 column grid -->
-    <div class="grid grid-cols-1 gap-4 items-start lg:grid-cols-4 lg:gap-8">
+<div class="flex-1 relative z-0 flex overflow-hidden h-screen bg-white">
+    <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none">
+        <!-- Start main area-->
+        <header aria-label="Page Header" class="bg-gray-50">
+            <div class="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+                <div class="sm:flex sm:items-center sm:justify-between">
 
-        <div class="grid grid-cols-1 gap-4 lg:col-span-4">
-            <!-- Welcome panel -->
-            <section aria-labelledby="profile-overview-title">
-                <div class="rounded-lg bg-white overflow-hidden shadow">
+                    <div class="sm:flex sm:space-x-5">
+                        <div class="flex-shrink-0">
 
-                    <div class="bg-white p-6">
-                        <div class="sm:flex sm:items-center sm:justify-between">
-                            <div class="sm:flex sm:space-x-5">
-                                <div class="flex-shrink-0">
-
-                                    <span *ngIf="user" class="inline-flex items-center justify-center h-16 w-16 rounded-full"
-                                        [ngClass]="generateRandomColor(user?.lastname?.charAt(0))">
-                                        <span class="text-xl font-medium leading-nonezz text-white">{{
-                                            user?.firstname?.charAt(0) }}{{ user?.lastname?.charAt(0)
-                                            }}</span>
-                                    </span>
-                                </div>
-                                <div class="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-                                    <p class="text-sm font-medium text-gray-600">{{ greeting }},</p>
-                                    <p class="text-xl font-bold text-gray-900 sm:text-2xl">{{ user?.firstname }} {{
-                                        user?.lastname }}</p>
-                                    <p class="text-sm font-medium text-gray-600">Human Resources Manager</p>
-                                </div>
-                            </div>
-                            <div class="mt-5 flex justify-center sm:mt-0">
-                                <a [routerLink]="['/dashboard/my-profile']"
-                                    class="flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                    Voir mon profil </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-        </div>
-
-        <!-- Left column -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-
-
-            <!-- Actions panel -->
-            <section aria-labelledby="quick-links-title">
-                <div
-                    class="rounded-lg bg-gray-200 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px">
-                    <h2 class="sr-only" id="quick-links-title">Quick links</h2>
-
-                    <div
-                        class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500">
-                        <div>
-                            <span class="rounded-lg inline-flex p-3 bg-teal-50 text-teal-700 ring-4 ring-white">
-                                <!-- Heroicon name: outline/clock -->
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                            <span *ngIf="user" class="inline-flex items-center justify-center h-16 w-16 rounded-full"
+                                [ngClass]="generateRandomColor(user?.lastname?.charAt(0))">
+                                <span class="text-xl font-medium leading-nonezz text-white">{{
+                                    user?.firstname?.charAt(0) }}{{ user?.lastname?.charAt(0)
+                                    }}</span>
                             </span>
                         </div>
-                        <div class="mt-8">
-                            <h3 class="text-lg font-medium">
-                                <a [routerLink]="['/dashboard/demande-conge']" class="focus:outline-none">
-                                    <!-- Extend touch target to entire panel -->
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    Demander un congé
-                                </a>
-                            </h3>
-                            <p class="mt-2 text-sm text-gray-500">
-                                Demander un congé en quelques clics et recevez une réponse dans les plus brefs délais.
-                                C'est simple et rapide !</p>
-                        </div>
-                        <span class="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400"
-                            aria-hidden="true">
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
-                            </svg>
-                        </span>
-                    </div>
+                        <div class="text-center sm:text-left">
+                            <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
+                                {{ greeting }}, {{ user?.firstname }}!
+                            </h1>
 
-                    <div
-                        class="sm:rounded-tr-lg relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500">
-                        <div>
-                            <span class="rounded-lg inline-flex p-3 bg-purple-50 text-purple-700 ring-4 ring-white">
-                                <!-- Heroicon name: outline/badge-check -->
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="mt-8">
-                            <h3 class="text-lg font-medium">
-                                <a [routerLink]="['/dashboard/mes-demandes-conge']" class="focus:outline-none">
-                                    <!-- Extend touch target to entire panel -->
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    Mes Demandes de congés
-                                </a>
-                            </h3>
-                            <p class="mt-2 text-sm text-gray-500">
-                                Retrouvez l'ensemble de vos demandes de congés et leurs statuts.
+                            <p class="mt-1.5 text-sm text-gray-500">
+                                Que voulez-vous faire aujourd'hui?
                             </p>
                         </div>
-                        <span class="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400"
-                            aria-hidden="true">
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
-                            </svg>
-                        </span>
                     </div>
+                    <div class="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
+                        <button (click)="openRoute('dashboard/my-profile')"
+                            class="bg-white inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 px-5 py-3 text-gray-500 transition hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring"
+                            type="button">
+                            <span class="text-sm font-medium">Modifier mon profil</span>
 
-                    <div
-                        class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500">
-                        <div>
-                            <span class="rounded-lg inline-flex p-3 bg-sky-50 text-sky-700 ring-4 ring-white">
-                                <!-- Heroicon name: outline/users -->
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="mt-8">
-                            <h3 class="text-lg font-medium">
-                                <a href="#" class="focus:outline-none">
-                                    <!-- Extend touch target to entire panel -->
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    Forum
-                                </a>
-                            </h3>
-                            <p class="mt-2 text-sm text-gray-500">
-                                Posez vos questions sur le forum et retrouvez les réponses apportées par les autres
-                                membres.</p>
-                        </div>
-                        <span class="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400"
-                            aria-hidden="true">
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
+
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                        </span>
+
+                        </button>
                     </div>
-
-                    <div
-                        class="relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500">
-                        <div>
-                            <span class="rounded-lg inline-flex p-3 bg-yellow-50 text-yellow-700 ring-4 ring-white">
-                                <!-- Heroicon name: outline/cash -->
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="mt-8">
-                            <h3 class="text-lg font-medium">
-                                <a href="#" class="focus:outline-none">
-                                    <!-- Extend touch target to entire panel -->
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    Formations
-                                </a>
-                            </h3>
-                            <p class="mt-2 text-sm text-gray-500">
-                                Découvrez les formations proposées par les membres de la communauté.</p>
-                        </div>
-                        <span class="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400"
-                            aria-hidden="true">
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
-                            </svg>
-                        </span>
-                    </div>
-
-
                 </div>
-            </section>
-        </div>
+            </div>
+        </header>
+        <section class="bg-white ">
+            <div class="container px-12 pb-10 pt-5 mx-auto">
 
-        <!-- Right column -->
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
-            <!-- Announcements -->
-            <section aria-labelledby="announcements-title">
-                <div class="rounded-lg bg-white overflow-hidden shadow">
-                    <div class="p-6">
-                        <h2 class="text-base font-medium text-gray-900" id="announcements-title">Annonces</h2>
-                        <div class="flow-root mt-6" *ngIf="annoncesList.length > 0">
-                            <ul role="list" class="-my-5 divide-y divide-gray-200">
-                                <li class="py-5" *ngFor="let annonce of annoncesList | slice:0:3">
-                                    <div class="relative focus-within:ring-2 focus-within:ring-cyan-500">
-                                        <h3 class="text-sm font-semibold text-gray-800">
-                                            <a href="#" class="hover:underline focus:outline-none">
-                                                <span class="absolute inset-0" aria-hidden="true"></span>
-                                                📌 {{ annonce.title }}
-                                            </a>
-                                        </h3>
-                                        <p class="mt-1 text-sm text-gray-600 line-clamp-2">{{ annonce.content }}</p>
-                                    </div>
-                                </li>
+                <p class="mt-4 text-gray-500 xl:mt-2 ">
+                    Choisissez parmi nos différentes pages pour demander un congé, consulter vos demandes en cours,
+                    participer
+                    au forum ou trouver des formations pour développer vos compétences.
+                </p>
 
-                            </ul>
+                <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+                    <div (click)="openRoute('/dashboard/demande-conge')"
+                        class="pointer-events-auto w-[21rem] cursor-pointer rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
+                        <div class="flex justify-between">
+                            <div class="font-medium text-slate-900">Demander un congé</div>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4F46E5" class="w-5 h-5">
+                                <path fill-rule="evenodd"
+                                    d="M5.625 1.5H9a3.75 3.75 0 013.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 013.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 01-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875zm5.845 17.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V12a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z"
+                                    clip-rule="evenodd" />
+                                <path
+                                    d="M14.25 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0016.5 7.5h-1.875a.375.375 0 01-.375-.375V5.25z" />
+                            </svg>
+
+
                         </div>
-                        <div class="mt-6" *ngIf="annoncesList.length == 0">
-                            <div class="text-center">
+                        <div class="mt-1 text-slate-700">Demandez un congé en quelques clics</div>
+                    </div>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="mx-auto h-12 w-12 text-gray-400">
-                                    <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
-                                    <path
-                                        d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
-                                    </path>
-                                </svg>
+                    <div (click)="openRoute('/dashboard/mes-demandes-conge')"
+                        class="pointer-events-auto w-[21rem] cursor-pointer rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
+                        <div class="flex justify-between">
+                            <div class="font-medium text-slate-900">Mes demandes de congés</div><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4F46E5" class="w-5 h-5">
+                                <path
+                                    d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z" />
+                                <path
+                                    d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
+                            </svg>
 
-                                <h3 class="my-2 text-sm font-medium text-gray-900">Aucune annonce pour le moment</h3>
+                        </div>
+                        <div class="mt-1 text-slate-700">Consultez vos demandes de congés</div>
+                    </div>
+
+
+                    <div (click)="openRoute('/dashboard/forum')"
+                        class="pointer-events-auto w-[21rem] cursor-pointer rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
+                        <div class="flex justify-between">
+                            <div class="font-medium text-slate-900">Forum</div><svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="#4F46E5" class="w-5 h-5">
+                                <path
+                                    d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 00-1.032-.211 50.89 50.89 0 00-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 002.433 3.984L7.28 21.53A.75.75 0 016 21v-4.03a48.527 48.527 0 01-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979z" />
+                                <path
+                                    d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 001.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0015.75 7.5z" />
+                            </svg>
+
+                        </div>
+                        <div class="mt-1 text-slate-700">Participez au forum</div>
+                    </div>
+
+
+                    <div (click)="openRoute('/dashboard/employees')"
+                        class="pointer-events-auto w-[21rem] cursor-pointer rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
+                        <div class="flex justify-between">
+                            <div class="font-medium text-slate-900">Employés</div><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4F46E5" class="w-5 h-5">
+                                <path
+                                    d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
+                            </svg>
+
+                        </div>
+                        <div class="mt-1 text-slate-700">Consultez la liste des employés</div>
+                    </div>
+
+                    <div (click)="openRoute('/dashboard/training')"
+                        class="pointer-events-auto w-[21rem] cursor-pointer rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 hover:bg-slate-50 ring-1 ring-slate-700/10">
+                        <div class="flex justify-between">
+                            <div class="font-medium text-slate-900">Formations</div><svg
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4F46E5" class="w-5 h-5">
+                                <path
+                                    d="M11.7 2.805a.75.75 0 01.6 0A60.65 60.65 0 0122.83 8.72a.75.75 0 01-.231 1.337 49.949 49.949 0 00-9.902 3.912l-.003.002-.34.18a.75.75 0 01-.707 0A50.009 50.009 0 007.5 12.174v-.224c0-.131.067-.248.172-.311a54.614 54.614 0 014.653-2.52.75.75 0 00-.65-1.352 56.129 56.129 0 00-4.78 2.589 1.858 1.858 0 00-.859 1.228 49.803 49.803 0 00-4.634-1.527.75.75 0 01-.231-1.337A60.653 60.653 0 0111.7 2.805z" />
+                                <path
+                                    d="M13.06 15.473a48.45 48.45 0 017.666-3.282c.134 1.414.22 2.843.255 4.285a.75.75 0 01-.46.71 47.878 47.878 0 00-8.105 4.342.75.75 0 01-.832 0 47.877 47.877 0 00-8.104-4.342.75.75 0 01-.461-.71c.035-1.442.121-2.87.255-4.286A48.4 48.4 0 016 13.18v1.27a1.5 1.5 0 00-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.661a6.729 6.729 0 00.551-1.608 1.5 1.5 0 00.14-2.67v-.645a48.549 48.549 0 013.44 1.668 2.25 2.25 0 002.12 0z" />
+                                <path
+                                    d="M4.462 19.462c.42-.419.753-.89 1-1.394.453.213.902.434 1.347.661a6.743 6.743 0 01-1.286 1.794.75.75 0 11-1.06-1.06z" />
+                            </svg>
+
+                        </div>
+                        <div class="mt-1 text-slate-700">Consultez la liste des formations</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container px-12 pb-10 pt-5 mx-auto">
+                <h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl ">Mes missions</h1>
+
+                <div class="flex flex-col py-10" *ngIf="user?.missions.length > 0">
+                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg border">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Nom de la mission</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Description</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Date de début / Date de fin</th>
+                                            <th scope="col"
+                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Statut</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr *ngFor="let mission of user?.missions">
+                                            <td class="px-6 py-4">
+                                                <div class="text-sm text-gray-900">{{ mission.name }}</div>
+                                            </td>
+                                            <td class="px-6 py-4 ">
+                                                <div class="text-sm text-gray-900">{{ mission.description }}</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <div class="text-sm text-gray-900">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                        fill="currentColor" class="text-slate-600 inline w-4 h-4">
+                                                        <path fill-rule="evenodd"
+                                                            d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                    {{ mission.startDate | date }} - {{ mission.endDate | date }}
+                                                </div>
+
+                                                <div class="text-sm text-gray-600">Durée: {{
+                                                    calculateDuration(mission.startDate, mission.endDate) }} jours</div>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+
+                                                <span *ngIf="mission?.missionStatus == 'PLANNED'"
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">Planifiée</span>
+                                                <span *ngIf="mission?.missionStatus == 'IN_PROGRESS'"
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">En
+                                                    cours</span>
+                                                <span *ngIf="mission?.missionStatus == 'COMPLETED'"
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Terminée</span>
+                                                <span *ngIf="mission?.missionStatus == 'CANCELLED'"
+                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Annulée</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="mt-6" *ngIf="annoncesList.length > 0">
-                            <a href="#"
-                                class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                Voir tous </a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col py-10" *ngIf="user?.missions.length == 0">
+                    <svg class="place-self-center	 w-40 h-40" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" x="0" y="0"
+                        viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve">
+                        <g>
+                            <linearGradient id="a">
+                                <stop offset="0" stop-color="#cadcf0"></stop>
+                                <stop offset="1" stop-color="#a4bbdb"></stop>
+                            </linearGradient>
+                            <linearGradient xlink:href="#a" id="d" x1="0" x2="1" y1="0" y2="0"
+                                gradientTransform="matrix(40 0 0 25.912 12 48.573)" gradientUnits="userSpaceOnUse">
+                            </linearGradient>
+                            <linearGradient id="b">
+                                <stop offset="0" stop-color="#a4bbdb"></stop>
+                                <stop offset="1" stop-color="#8da3be"></stop>
+                            </linearGradient>
+                            <linearGradient xlink:href="#b" id="e" x1="0" x2="1" y1="0" y2="0"
+                                gradientTransform="matrix(20.086 0 0 25.912 31.914 48.573)"
+                                gradientUnits="userSpaceOnUse"></linearGradient>
+                            <linearGradient id="c">
+                                <stop offset="0" stop-color="#e9f3fc"></stop>
+                                <stop offset="1" stop-color="#cadcf0"></stop>
+                            </linearGradient>
+                            <linearGradient xlink:href="#c" id="f" x1="0" x2="1" y1="0" y2=".337"
+                                gradientTransform="matrix(14.679 14.768 -21.492 8.973 12.133 35.609)"
+                                gradientUnits="userSpaceOnUse"></linearGradient>
+                            <linearGradient xlink:href="#c" id="g" x1="0" x2="1" y1="0" y2=".227"
+                                gradientTransform="matrix(25.743 1.634 -3.837 17.203 32.081 42.038)"
+                                gradientUnits="userSpaceOnUse"></linearGradient>
+                            <linearGradient xlink:href="#c" id="h" x1="0" x2="1" y1="0" y2="-.619"
+                                gradientTransform="matrix(20.007 -6.501 5.236 7.762 9.382 31.736)"
+                                gradientUnits="userSpaceOnUse"></linearGradient>
+                            <linearGradient xlink:href="#c" id="i" x1="0" x2="1" y1="0" y2=".429"
+                                gradientTransform="matrix(15.249 13.945 -20.61 7.651 37.354 21.357)"
+                                gradientUnits="userSpaceOnUse"></linearGradient>
+                            <linearGradient xlink:href="#a" id="j" x1="0" x2="1" y1="0" y2="0"
+                                gradientTransform="matrix(40 0 0 13 12 35.606)" gradientUnits="userSpaceOnUse">
+                            </linearGradient>
+                            <linearGradient xlink:href="#b" id="k" x1="0" x2="1" y1="0" y2="0"
+                                gradientTransform="scale(16.159) rotate(88.472 .138 1.974)"
+                                gradientUnits="userSpaceOnUse"></linearGradient>
+                            <linearGradient id="l" x1="0" x2="1" y1="0" y2="0"
+                                gradientTransform="rotate(49.719 3.124 26.068) scale(30.507)"
+                                gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="#559aff"></stop>
+                                <stop offset="1" stop-color="#2e69ef"></stop>
+                            </linearGradient>
+                            <linearGradient xlink:href="#c" id="m" x1="0" x2="1" y1="0" y2="0"
+                                gradientTransform="matrix(6.695 0 0 4.448 30.933 4.607)" gradientUnits="userSpaceOnUse">
+                            </linearGradient>
+                            <linearGradient xlink:href="#c" id="n" x1="0" x2="1" y1="0" y2="0"
+                                gradientTransform="matrix(6.695 0 0 -4.448 30.933 10.607)"
+                                gradientUnits="userSpaceOnUse"></linearGradient>
+                            <path fill="url(#d)"
+                                d="M52 35.617H12v18.512a2 2 0 0 0 1.425 1.916l18 5.4a2.01 2.01 0 0 0 1.15 0l18-5.4A2 2 0 0 0 52 54.129V35.617z"
+                                data-original="url(#d)"></path>
+                            <path fill="url(#e)"
+                                d="M52 35.617H32s-.194 25.912 0 25.912.387-.028.575-.084l18-5.4A2 2 0 0 0 52 54.129V35.617z"
+                                data-original="url(#e)"></path>
+                            <path fill="url(#f)"
+                                d="m32 42.106-20-6.489-5.075 7.524a1 1 0 0 0 .52 1.511l17.995 5.846a1 1 0 0 0 1.137-.39L32 42.106z"
+                                data-original="url(#f)"></path>
+                            <path fill="url(#g)"
+                                d="m52 35.617-20 6.489 5.423 8.002a1 1 0 0 0 1.137.39l17.995-5.846a1 1 0 0 0 .52-1.511L52 35.617z"
+                                data-original="url(#g)"></path>
+                            <path fill="url(#h)"
+                                d="M27.159 21.986a1 1 0 0 0-1.136-.388L8.027 27.445a.998.998 0 0 0-.52 1.51L12 35.617l20-6.511-4.841-7.12z"
+                                data-original="url(#h)" class=""></path>
+                            <path fill="url(#i)"
+                                d="M56.493 28.955a1 1 0 0 0-.52-1.51l-17.996-5.847a1 1 0 0 0-1.136.388L32 29.106l20 6.511 4.493-6.662z"
+                                data-original="url(#i)"></path>
+                            <path fill="url(#j)" d="m52 35.617-20-6.511-20 6.511 20 6.489z" data-original="url(#j)">
+                            </path>
+                            <path fill="url(#k)" d="M32 42.106v-13l-20 6.511z" data-original="url(#k)"></path>
+                            <g fill="url(#l)">
+                                <path
+                                    d="M27.982 31.978a8.757 8.757 0 0 1-1.124-.868 1 1 0 0 0-1.352 1.473c.409.376.87.734 1.382 1.069a1 1 0 0 0 1.094-1.674zM24.866 28.906a8.689 8.689 0 0 1-.754-1.213 1 1 0 0 0-1.783.907c.254.498.562.997.927 1.492a1 1 0 0 0 1.61-1.186zM23.404 24.825c.01-.403.069-.794.177-1.169a1 1 0 0 0-1.923-.551 6.71 6.71 0 0 0-.254 1.67 1 1 0 0 0 2 .05zM24.942 21.485c.257-.238.545-.458.86-.657a1 1 0 0 0-1.067-1.692 7.855 7.855 0 0 0-1.152.882 1 1 0 0 0 1.359 1.467zM28.661 19.76a11.338 11.338 0 0 1 1.598-.176 1.001 1.001 0 0 0-.085-1.999c-.66.028-1.286.099-1.877.208a1 1 0 0 0 .364 1.967zM33.873 19.701c.853.01 1.647-.02 2.384-.085a1 1 0 0 0-.177-1.992c-.675.059-1.402.087-2.184.077a1 1 0 0 0-.023 2zM39.544 19.003c.99-.303 1.826-.691 2.526-1.136a1 1 0 0 0-1.075-1.687 8.302 8.302 0 0 1-2.036.91 1 1 0 0 0 .585 1.913zM44.634 15.068a6.21 6.21 0 0 0 .607-3.003 1 1 0 0 0-1.998.093 4.215 4.215 0 0 1-.41 2.04 1.001 1.001 0 0 0 1.801.87zM43.997 8.529c-.729-.985-1.718-1.671-2.796-1.892a1.001 1.001 0 0 0-.402 1.96c.622.127 1.17.554 1.591 1.123a1 1 0 1 0 1.607-1.191z"
+                                    fill=""></path>
+                            </g>
+                            <path fill="url(#m)" d="M30.933 6.831c1.082-6.127 10.459-5.731 5 0z"
+                                data-original="url(#m)"></path>
+                            <path fill="url(#n)" d="M30.933 8.383c1.082 6.126 10.459 5.731 5 0z"
+                                data-original="url(#n)"></path>
+                            <path fill="url(#l)" d="M30.843 8.617h6.696a1 1 0 0 0 0-2h-6.696a1.001 1.001 0 0 0 0 2z"
+                                data-original="url(#l)"></path>
+                        </g>
+                    </svg>
+                    <p class="text-center text-gray-500 pt-3">Vous n'avez pas encore de mission</p>
+                </div>
+
+
+            </div>
+        </section>
+
+
+
+        <!-- End main area -->
+    </main>
+    <aside class="relative xl:flex xl:flex-col flex-shrink-0 w-1/3 border-l border-gray-200 overflow-y-auto">
+        <!-- Start secondary column (hidden on smaller screens) -->
+        <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
+            <div class="h-full">
+                <h3 class="text-2xl font-bold text-gray-900">Announes</h3>
+
+                <div *ngFor="let annonce of annoncesList"
+                    class="my-4 pointer-events-auto w-full rounded-lg bg-white p-4 text-[0.8125rem] leading-5 shadow-xl shadow-black/5 ring-1 ring-slate-700/10">
+                    <div class="flex justify-between">
+                        <div class="font-medium text-slate-900">{{annonce?.title}}</div>
+                    </div>
+                    <div class="mt-1 text-slate-700">
+                        <div [innerHTML]="annonce?.content | safeHtml"></div>
+                    </div>
+                    <div class="mt-2 text-slate-600">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-4 h-4 inline">
+                                <path fill-rule="evenodd"
+                                    d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+                            Publié le {{annonce?.dateCreated | date:'dd/MM/yyyy à HH:mm'}}
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Recent Hires -->
-            <section aria-labelledby="recent-hires-title">
-                <div class="rounded-lg bg-white overflow-hidden shadow">
-                    <div class="p-6">
-                        <h2 class="text-base font-medium text-gray-900" id="recent-hires-title">Mes missions</h2>
-                        <div class="flow-root mt-6">
-                            <ul role="list" class="-my-5 divide-y divide-gray-200">
-                                <li class="py-4">
-                                    <div class="flex items-center space-x-4">
-                                        <div class="flex-shrink-0">
+                <br>
 
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
-                                            </svg>
-
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900 truncate">Leonard Krasner</p>
-                                            <p class="text-sm text-gray-500 truncate">Lorem ipsum dolor sit amet
-                                                consectetur
-                                                adipisicing elit. Quasi laborum eveniet, qui blanditiis sed deleniti
-                                                sunt fugiat distinctio possimus inventore laboriosam aperiam itaque illo
-                                                expedita nisi vitae sit praesentium debitis.</p>
-                                        </div>
-                                        <div>
-                                            <a href="#"
-                                                class="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                                                Voir </a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mt-6">
-                            <a href="#"
-                                class="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                Voir tous </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         </div>
-    </div>
+        <!-- End secondary column -->
+    </aside>
 </div>
-<app-footer></app-footer>

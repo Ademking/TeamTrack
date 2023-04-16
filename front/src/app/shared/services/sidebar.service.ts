@@ -4,7 +4,7 @@ type SidebarItem = { title: string, path: string, icon: string };
 
 @Injectable({ providedIn: 'root' })
 export class SidebarService {
-    
+
     public usersIcon = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-hover:text-gray-300 mr-4 flex-shrink-0 h-6 w-6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`;
 
@@ -25,6 +25,13 @@ export class SidebarService {
     public announcementIcon = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-hover:text-gray-300 mr-4 flex-shrink-0 h-6 w-6"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`
 
+    public congeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-400 group-hover:text-gray-300 mr-4 flex-shrink-0 h-6 w-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+</svg>`
+
+    public mydemandsIcon = `<svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-400 group-hover:text-gray-300 mr-4 flex-shrink-0 h-6 w-6">
+<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+</svg>`
 
 
     constructor() { }
@@ -43,7 +50,7 @@ export class SidebarService {
                 title: 'Mes demandes', path: '/dashboard/mes-demandes-conge', icon: this.calendarIcon
             },
             {
-                title: 'Demander un congé', path: '/dashboard/demande-conge', icon: this.calendarIcon
+                title: 'Demander un congé', path: '/dashboard/demande-conge', icon: this.mydemandsIcon
             },
             {
                 title: 'Forum', path: '/dashboard/forum', icon: this.forumIcon
@@ -67,13 +74,13 @@ export class SidebarService {
                 title: 'Employés', path: '/dashboard/employees', icon: this.usersIcon
             },
             {
-                title: 'Congés', path: '/dashboard/leave-management', icon: this.calendarIcon
+                title: 'Congés', path: '/dashboard/leave-management', icon: this.congeIcon
             },
             // {
             //     title: 'Mes demandes', path: '/dashboard/mes-demandes-conge', icon: this.calendarIcon
             // },
             // {
-            //     title: 'Demander un congé', path: '/dashboard/demande-conge', icon: this.calendarIcon
+            //     title: 'Demander un congé', path: '/dashboard/demande-conge', icon: this.mydemandsIcon
             // },
             {
                 title: 'Missions', path: '/dashboard/missions', icon: this.missionIcon

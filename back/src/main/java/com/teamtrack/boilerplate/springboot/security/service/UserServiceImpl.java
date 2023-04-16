@@ -118,4 +118,17 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findById(userId).orElseThrow(
 				() -> new RuntimeException("User not found with id: " + userId));
 	}
+
+	@Override
+	public Boolean checkIfValidOldPassword(User user, String oldPassword) {
+		return bCryptPasswordEncoder.matches(oldPassword, user.getPassword());
+	}
+
+	@Override
+	public User changeUserPassword(User user, String password) {
+		user.setPassword(bCryptPasswordEncoder.encode(password));
+		return userRepository.save(user);
+	}
+
+	
 }

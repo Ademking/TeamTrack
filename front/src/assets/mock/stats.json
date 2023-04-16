@@ -1,0 +1,25 @@
+{
+    "nb_users": 20,
+    "nb_missions": 20,
+    "nb_leaves": 20,
+    "missions": {
+        "planned" : 10,
+        "in_progress" : 7,
+        "completed" : 3,
+        "cancelled": 1
+    },
+    "leaves": {
+        "annual_leave" : 10,
+        "maternity_leave" : 7,
+        "sick_leave" : 3,
+        "accepted" : 10,
+        "rejected" : 7,
+        "pending" : 3
+    },
+    "teams": {
+        "team1" : 10,
+        "team2" : 7,
+        "team3" : 3
+    }
+
+}

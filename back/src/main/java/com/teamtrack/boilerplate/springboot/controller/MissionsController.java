@@ -26,6 +26,7 @@ import com.teamtrack.boilerplate.springboot.model.User;
 import com.teamtrack.boilerplate.springboot.repository.MissionRepository;
 import com.teamtrack.boilerplate.springboot.repository.UserRepository;
 import com.teamtrack.boilerplate.springboot.security.service.UserService;
+import com.teamtrack.boilerplate.springboot.service.EmailService;
 import com.teamtrack.boilerplate.springboot.service.MissionService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,7 @@ public class MissionsController {
     private final MissionRepository missionRepository;
     private final UserService userService;
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -67,14 +69,21 @@ public class MissionsController {
 
         Mission newMission = missionService.addMission(missionReq.getMission());
         List<User> employees = userService.getUsersByIds(missionReq.getEmployeesIds());
-
+        String [] recipient = new String[employees.size()];
         // foreach employee, add the mission to his missions list
         for (User employee : employees) {
             List<Mission> missions = employee.getMissions();
             missions.add(newMission);
             employee.setMissions(missions);
             userService.updateUser(employee.getId(), employee);
+            recipient[employees.indexOf(employee)] = employee.getEmail();
         }
+
+        String subject = "Confirmation de mission";
+        String body = "Bonjour,\r\rVous avez une nouvelle mission. Merci de consulter votre espace personnel pour plus de détails.\r\rCordialement,\rL'équipe TeamTrack";
+        // send email to all employees
+        emailService.sendEmail(recipient, subject, body);
+
         return ResponseEntity.ok().body(Map.of("message", "Mission added successfully"));
     }
 
